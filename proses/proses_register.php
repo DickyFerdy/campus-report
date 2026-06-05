@@ -1,25 +1,25 @@
 <?php
-require_once 'config/koneksi.php';
+require_once __DIR__ . '/../config/koneksi.php';
 
-$pesan = ""; // variabel untuk menampung notifikasi
+$pesan = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nama_lengkap  = $_POST['nama_lengkap'];
-    $npm           = $_POST['npm'];
-    $email         = $_POST['email'];
-    $password      = $_POST['password'];
-    $konfirmasi    = $_POST['konfirmasi_password'];
-    $program_studi = $_POST['program_studi'];
+    $nama_lengkap  = trim($_POST['nama_lengkap'] ?? '');
+    $npm           = trim($_POST['npm'] ?? '');
+    $email         = trim($_POST['email'] ?? '');
+    $password      = $_POST['password'] ?? '';
+    $konfirmasi    = $_POST['konfirmasi_password'] ?? '';
+    $program_studi = $_POST['program_studi'] ?? '';
 
     // validasi input
     if (empty($nama_lengkap) || empty($npm) || empty($email) || empty($password) || empty($program_studi)) {
-        $pesan = "<p style='color: #dc2626; text-align: center; font-size: 13px;'>Semua kolom wajib diisi!</p>";
+        $pesan = "<div class='alert-error'>Semua kolom wajib diisi!</div>";
     } 
     else if ($password !== $konfirmasi) {
-        $pesan = "<p style='color: #dc2626; text-align: center; font-size: 13px;'>Password dan Konfirmasi tidak cocok!</p>";
+        $pesan = "<div class='alert-error'>Password dan Konfirmasi tidak cocok!</div>";
     } 
     else if (!isset($_POST['syarat'])) {
-        $pesan = "<p style='color: #dc2626; text-align: center; font-size: 13px;'>Anda harus menyetujui Syarat & Ketentuan.</p>";
+        $pesan = "<div class='alert-error'>Anda harus menyetujui Syarat & Ketentuan.</div>";
     } 
     else {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -27,17 +27,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare("INSERT INTO users (nama_lengkap, npm, email, password, program_studi) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $nama_lengkap, $npm, $email, $hashed_password, $program_studi);
 
-        if ($stmt->execute()) {
-            $pesan = "<p style='color: #16a34a; text-align: center; font-size: 13px;'>Pendaftaran berhasil! Silahkan <a href='login.php' style='color: #1a56db; font-weight:600;'>Masuk</a>.</p>";
-        } else {
-            if ($conn->errno == 1062) {
-                $pesan = "<p style='color: #dc2626; text-align: center; font-size: 13px;'>NPM atau Email Kampus sudah terdaftar!</p>";
+        try {
+            if ($stmt->execute()) {
+                $pesan = "<div class='alert-success'>Pendaftaran berhasil! Silahkan <a href='login.php' style='color: #1a56db; font-weight:600;'>Masuk</a>.</div>";
             } else {
-                $pesan = "<p style='color: #dc2626; text-align: center; font-size: 13px;'>Terjadi kesalahan: " . $stmt->error . "</p>";
+                $pesan = "<div class='alert-error'>Terjadi kesalahan: " . $stmt->error . "</div>";
+            }
+        } catch (mysqli_sql_exception $e) {
+            if ((int)$e->getCode() === 1062) {
+                $pesan = "<div class='alert-error'>NPM atau Email Kampus sudah terdaftar!</div>";
+            } else {
+                $pesan = "<div class='alert-error'>Terjadi kesalahan: " . $e->getMessage() . "</div>";
             }
         }
-        $stmt->close();
+        
+        if (isset($stmt) && $stmt instanceof mysqli_stmt) {
+            $stmt->close();
+        }
     }
 }
+
 $conn->close();
 ?>
