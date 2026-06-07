@@ -268,3 +268,566 @@ select.form-control {
         gap: 0; 
     }
 }
+
+/* =========================================
+   --- DESAIN KHUSUS DASHBOARD ---
+========================================= */
+
+/* Penyesuaian Body khusus Dashboard agar tidak ke-tengah seperti halaman Login */
+body.dashboard-page {
+    display: block;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* --- Variabel Warna Tambahan Khusus Dashboard --- */
+:root {
+    --sidebar-bg: #f8fafc;
+    --sidebar-hover: #e2e8f0;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --status-diproses-bg: #e0e7ff;
+    --status-diproses-text: #3730a3;
+    --status-menunggu-bg: #ffedd5;
+    --status-menunggu-text: #9a3412;
+    --sidebar-width: 260px;
+}
+
+/* --- Layout Utama --- */
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+.brand-icon {
+    width: 36px;
+    height: 36px;
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.brand-text h3 {
+    font-size: 16px;
+    color: var(--text-main);
+    margin: 0;
+}
+.brand-text p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+}
+.nav-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.nav-item a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+.nav-item a:hover {
+    background-color: var(--sidebar-hover);
+    color: var(--text-main);
+}
+.nav-item.active a {
+    background-color: var(--bg-surface);
+    color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.sidebar-bottom {
+    margin-top: auto;
+}
+.logout-btn {
+    color: var(--error-color) !important;
+}
+.logout-btn:hover {
+    background-color: #fef2f2 !important;
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    padding: 24px 40px;
+}
+
+/* Topbar */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--sidebar-bg);
+    padding: 10px 16px;
+    border-radius: 8px;
+    width: 300px;
+}
+.search-bar input {
+    border: none;
+    background: transparent;
+    outline: none;
+    margin-left: 8px;
+    width: 100%;
+    font-size: 14px;
+}
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #dbeafe;
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 14px;
+}
+.user-info h4 { margin: 0; font-size: 14px; color: var(--text-main); }
+.user-info p { margin: 0; font-size: 12px; color: var(--primary-color); font-weight: 600; }
+
+/* Dashboard Header */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
+}
+.dashboard-header h1 {
+    font-size: 28px;
+    margin: 0 0 8px 0;
+    color: var(--text-main);
+}
+.dashboard-header p {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin: 0;
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+    border: none;
+    cursor: pointer;
+}
+.btn-primary:hover { background-color: var(--primary-hover); }
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.stat-card {
+    background: var(--bg-surface);
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+}
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+    background-color: var(--sidebar-bg);
+}
+.stat-card p {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0 0 8px 0;
+}
+.stat-card h3 {
+    font-size: 28px;
+    margin: 0;
+    color: var(--text-main);
+}
+
+/* Content Grid (Left & Right Column) */
+.content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+.section-title {
+    font-size: 18px;
+    color: var(--text-main);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.section-title a {
+    font-size: 13px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Report List */
+.report-card {
+    background: var(--bg-surface);
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+    transition: transform 0.2s;
+}
+.report-card:hover { transform: translateY(-2px); }
+.report-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    background-color: var(--sidebar-bg);
+}
+.report-details { flex: 1; }
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+.badge.kategori { background-color: #f1f5f9; color: #475569; }
+.badge.diproses { background-color: var(--status-diproses-bg); color: var(--status-diproses-text); }
+.badge.menunggu { background-color: var(--status-menunggu-bg); color: var(--status-menunggu-text); }
+.report-details h4 { margin: 0 0 6px 0; font-size: 15px; color: var(--text-main); }
+.report-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+.report-action { color: var(--text-muted); }
+
+/* Quick Actions Widget */
+.action-widget {
+    background: linear-gradient(135deg, var(--primary-color), #2563eb);
+    padding: 24px;
+    border-radius: 16px;
+    color: white;
+    margin-bottom: 24px;
+}
+.action-widget h3 { margin: 0 0 8px 0; font-size: 18px; }
+.action-widget p { font-size: 13px; line-height: 1.5; margin-bottom: 20px; opacity: 0.9; }
+.btn-white {
+    display: block; width: 100%; text-align: center; background: white; color: var(--primary-color);
+    padding: 12px; border-radius: 8px; font-weight: 600; text-decoration: none; margin-bottom: 12px; font-size: 14px;
+}
+.btn-outline {
+    display: block; width: 100%; text-align: center; background: rgba(255,255,255,0.2); color: white;
+    padding: 12px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 14px;
+}
+
+/* Floating Action Button */
+.fab {
+    position: fixed; bottom: 30px; right: 30px; width: 56px; height: 56px;
+    background-color: var(--primary-color); border-radius: 50%; display: flex;
+    justify-content: center; align-items: center; color: white; font-size: 24px;
+    box-shadow: 0 10px 15px -3px rgba(26, 86, 219, 0.3); cursor: pointer; transition: 0.2s;
+}
+.fab:hover { transform: scale(1.05); background-color: var(--primary-hover); }
+
+/* Responsive Mobile */
+@media (max-width: 1024px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .content-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); z-index: 100; transition: 0.3s; }
+    .main-content { margin-left: 0; padding: 20px; }
+    .dashboard-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .report-card { flex-direction: column; align-items: flex-start; }
+    .report-img { width: 100%; height: 150px; }
+}
+
+/* =========================================
+   --- DESAIN KHUSUS FORM LAPORAN ---
+========================================= */
+
+.page-header {
+    text-align: center;
+    margin-bottom: 32px;
+    margin-top: 20px;
+}
+.page-header h2 {
+    font-size: 28px;
+    color: var(--text-main);
+    margin: 0 0 8px 0;
+}
+.page-header p {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin: 0;
+}
+
+/* Card Container untuk Form */
+.form-card {
+    background: var(--bg-surface);
+    padding: 32px 40px;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 32px;
+}
+
+/* Grid Layout Form Kiri & Kanan */
+.form-grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+.form-grid-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* Custom Radio Button (Pills) untuk Prioritas */
+.priority-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+}
+.priority-group input[type="radio"] {
+    display: none; /* Sembunyikan radio button asli */
+}
+.priority-group label {
+    flex: 1;
+    text-align: center;
+    padding: 12px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.priority-group label:hover {
+    border-color: #cbd5e1;
+}
+/* --- Style saat radio button dipilih berdasarkan ID --- */
+
+/* 1. Prioritas Rendah (Biru) */
+#prioritas_rendah:checked + label {
+    background-color: #dbeafe;
+    border-color: #2563eb;
+    color: var(--text-main);
+}
+
+/* 2. Prioritas Sedang (Oranye/Peach) */
+#prioritas_sedang:checked + label {
+    background-color: #ffedd5;
+    border-color: #c2410c;
+    color: var(--text-main);
+}
+
+/* 3. Prioritas Tinggi (Merah/Pink) */
+#prioritas_tinggi:checked + label {
+    background-color: #fee2e2;
+    border-color: #b91c1c;
+    color: var(--text-main);
+}
+
+/* Tambahan: efek hover agar sedikit lebih interaktif */
+#prioritas_rendah:hover + label { border-color: #60a5fa; }
+#prioritas_sedang:hover + label { border-color: #fb923c; }
+#prioritas_tinggi:hover + label { border-color: #f87171; }
+
+/* Textarea khusus Deskripsi */
+textarea.form-control {
+    resize: vertical;
+    min-height: 135px;
+    font-family: inherit;
+}
+
+/* Area Unggah Foto */
+.upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 16px;
+    padding: 40px 20px;
+    text-align: center;
+    background-color: var(--bg-body);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.upload-area:hover {
+    border-color: var(--primary-color);
+    background-color: var(--primary-focus);
+}
+.upload-area input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.upload-icon {
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    background: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.upload-area h4 {
+    margin: 0 0 6px 0;
+    color: var(--text-main);
+    font-size: 14px;
+}
+.upload-area p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+/* Form Actions (Tombol Batal & Kirim) */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+}
+.btn-secondary {
+    background-color: #e2e8f0;
+    color: #475569;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-secondary:hover {
+    background-color: #cbd5e1;
+}
+/* btn-primary sudah ada sebelumnya, kita modif sedikit padding-nya untuk tombol ini */
+.btn-submit-report {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 32px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 4px 6px -1px rgba(26, 86, 219, 0.2);
+}
+.btn-submit-report:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Info Cards di Bawah */
+.info-cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+.info-card {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+.info-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.info-card h4 {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-main);
+}
+.info-card p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-grid-2-col, .form-grid-inner, .info-cards-container {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .form-card { padding: 24px; }
+}
