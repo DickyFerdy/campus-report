@@ -153,7 +153,17 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
                             <?php 
                                 // Format warna badge status
                                 $status_lower = strtolower($report['status']); 
-                                $status_class = ($status_lower == 'menunggu') ? 'menunggu' : (($status_lower == 'diproses') ? 'diproses' : 'kategori');
+                                if ($status_lower == 'menunggu') {
+                                    $status_class = 'menunggu';
+                                } elseif ($status_lower == 'diproses') {
+                                    $status_class = 'diproses';
+                                } elseif ($status_lower == 'selesai') {
+                                    $status_class = 'success';
+                                } elseif ($status_lower == 'ditolak') {
+                                    $status_class = 'ditolak';
+                                } else {
+                                    $status_class = 'kategori';
+                                }
                                 
                                 // Format tanggal dari database (Contoh: 24 Okt 2024)
                                 $tanggal_format = date('d M Y', strtotime($report['created_at']));
@@ -178,9 +188,9 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
                                 <div>
                                     <span class="badge <?= $status_class ?>"><?= strtoupper($report['status']) ?></span>
                                 </div>
-                                <div class="report-action" style="padding-left: 10px;">
+                                <a href="detail_laporan.php?id=<?= $report['id'] ?>" class="report-action" style="padding-left: 10px; color: inherit;">
                                     <iconify-icon icon="lucide:chevron-right" width="20"></iconify-icon>
-                                </div>
+                                </a>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>

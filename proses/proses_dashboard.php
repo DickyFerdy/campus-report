@@ -37,7 +37,7 @@ while ($row = $result_stats->fetch_assoc()) {
 $stmt_stats->close();
 
 $recent_reports = [];
-$stmt_recent = $conn->prepare("SELECT judul_laporan, kategori, gedung, status, created_at, foto_bukti FROM reports WHERE user_id = ? ORDER BY created_at DESC LIMIT 2");
+$stmt_recent = $conn->prepare("SELECT id, judul_laporan, kategori, gedung, status, created_at, foto_bukti FROM reports WHERE user_id = ? ORDER BY created_at DESC LIMIT 2");
 $stmt_recent->bind_param("i", $user_id);
 $stmt_recent->execute();
 $result_recent = $stmt_recent->get_result();
