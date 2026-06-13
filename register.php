@@ -61,7 +61,9 @@ include 'proses/proses_register.php';
 
             <div class="checkbox-group">
                 <input type="checkbox" name="syarat" id="syarat" required>
-                <label for="syarat">Saya setuju dengan <a href="#">Syarat & Ketentuan</a> yang berlaku.</label>
+                <label for="agree">
+                    Saya menyetujui <a href="syarat_ketentuan.php" target="_blank" style="color: var(--primary-color); font-weight: 700; text-decoration: none;">Syarat & Ketentuan</a> yang berlaku di platform ini.
+                </label>
             </div>
 
             <button type="submit" class="btn-submit">Daftar Sekarang</button>

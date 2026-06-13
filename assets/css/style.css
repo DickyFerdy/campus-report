@@ -1340,3 +1340,36 @@ textarea.form-control {
 .notif-text p { margin: 0 0 6px 0; font-size: 12px; color: var(--text-muted); line-height: 1.4; }
 .notif-time { font-size: 10px; color: #94a3b8; font-weight: 600; }
 .notif-empty { padding: 32px 16px; text-align: center; color: var(--text-muted); font-size: 13px; }
+
+/* =========================================
+   --- DESAIN KHUSUS SYARAT & KETENTUAN ---
+========================================= */
+.doc-container {
+    max-width: 760px; margin: 40px auto; padding: 0 20px;
+}
+.doc-card {
+    background: var(--bg-surface); padding: 48px; border-radius: 16px;
+    box-shadow: var(--card-shadow); border: 1px solid var(--border-color);
+}
+.doc-title-section {
+    text-align: center; margin-bottom: 40px; padding-bottom: 24px;
+    border-bottom: 2px solid var(--border-color);
+}
+.doc-title-section h1 { font-size: 28px; color: var(--text-main); margin: 0 0 8px 0; }
+.doc-title-section p { font-size: 13px; color: var(--text-muted); margin: 0; font-weight: 500; }
+
+.doc-section { margin-bottom: 32px; }
+.doc-section-header {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 16px; font-weight: 700; color: var(--text-main); margin-bottom: 12px;
+}
+.doc-section-header iconify-icon { color: var(--primary-color); }
+.doc-section p {
+    font-size: 14px; color: #475569; line-height: 1.7; margin: 0 0 12px 0; text-align: justify;
+}
+.doc-list {
+    margin: 0 0 16px 0; padding-left: 24px;
+}
+.doc-list li {
+    font-size: 14px; color: #475569; line-height: 1.7; margin-bottom: 8px;
+}

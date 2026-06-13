@@ -42,7 +42,7 @@ if(isset($_SESSION['user_id'])){
                     <input type="checkbox" name="remember" id="remember">
                     <label for="remember">Ingat saya</label>
                 </div>
-                <a href="#" class="forgot-password">Lupa kata sandi?</a>
+                <a href="lupa_password.php" class="forgot-password">Lupa kata sandi?</a>
             </div>
 
             <button type="submit" class="btn-submit">Masuk ke CampusReport</button>
