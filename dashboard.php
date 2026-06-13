@@ -55,7 +55,7 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="status_laporan.php">
                         <iconify-icon icon="lucide:activity" width="20"></iconify-icon> Status Laporan
                     </a>
                 </li>
