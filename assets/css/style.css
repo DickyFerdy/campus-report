@@ -1280,3 +1280,63 @@ textarea.form-control {
     .search-form { max-width: 100%; }
     .bottom-widgets-grid { grid-template-columns: 1fr; }
 }
+
+/* =========================================
+   --- DESAIN KHUSUS DROPDOWN NOTIFIKASI ---
+========================================= */
+.notif-wrapper {
+    position: relative;
+    display: inline-block;
+}
+.notif-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-muted); position: relative;
+    display: flex; align-items: center; justify-content: center;
+    padding: 4px; border-radius: 50%; transition: 0.2s;
+}
+.notif-btn:hover { background: var(--bg-body); color: var(--primary-color); }
+
+/* Titik Merah Notifikasi */
+.notif-badge {
+    position: absolute; top: 2px; right: 4px;
+    width: 8px; height: 8px; background-color: var(--error-color);
+    border-radius: 50%; border: 2px solid var(--bg-surface);
+}
+
+/* Kotak Dropdown */
+.notif-dropdown {
+    position: absolute; top: 120%; right: 0;
+    width: 320px; background: var(--bg-surface);
+    border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    border: 1px solid var(--border-color);
+    z-index: 100;
+    
+    /* Animasi sembunyi/muncul */
+    opacity: 0; visibility: hidden; transform: translateY(10px);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.notif-dropdown.show {
+    opacity: 1; visibility: visible; transform: translateY(0);
+}
+
+/* Isi Notifikasi */
+.notif-header {
+    padding: 16px; border-bottom: 1px solid var(--border-color);
+    display: flex; justify-content: space-between; align-items: center;
+}
+.notif-header h4 { margin: 0; font-size: 14px; color: var(--text-main); }
+.notif-body { max-height: 360px; overflow-y: auto; }
+.notif-item {
+    display: flex; gap: 12px; padding: 16px;
+    border-bottom: 1px solid #f8fafc; text-decoration: none; transition: 0.2s;
+}
+.notif-item:hover { background: #f8fafc; }
+.notif-item:last-child { border-bottom: none; }
+.notif-icon-box {
+    width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+    display: flex; justify-content: center; align-items: center; color: white;
+}
+.notif-text h5 { margin: 0 0 4px 0; font-size: 13px; color: var(--text-main); }
+.notif-text p { margin: 0 0 6px 0; font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+.notif-time { font-size: 10px; color: #94a3b8; font-weight: 600; }
+.notif-empty { padding: 32px 16px; text-align: center; color: var(--text-muted); font-size: 13px; }

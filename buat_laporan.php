@@ -41,24 +41,7 @@ $inisial = strtoupper(substr($inisial, 0, 2));
 
         <main class="main-content">
             
-            <header class="topbar">
-                <div class="search-bar">
-                    <iconify-icon icon="lucide:search" width="18" style="color: #9ca3af;"></iconify-icon>
-                    <input type="text" placeholder="Cari laporan...">
-                </div>
-                <div class="topbar-right">
-                    <a href="#" style="color: var(--text-muted); display: flex; align-items: center;">
-                        <iconify-icon icon="lucide:bell" width="22"></iconify-icon>
-                    </a>
-                    <div class="user-profile" style="margin-left: 8px;">
-                        <div class="avatar"><?= $inisial ?></div>
-                        <div class="user-info">
-                            <h4><?= htmlspecialchars($nama_user) ?></h4>
-                            <p>MHS-2024</p>
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <?php include 'includes/topbar.php'; ?>
 
             <div class="page-header">
                 <h2>Buat Laporan Baru</h2>

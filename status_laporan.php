@@ -23,22 +23,7 @@ require_once __DIR__ . '/proses/proses_status.php';
 
         <main class="main-content">
             
-            <header class="topbar">
-                <div class="search-bar">
-                    <iconify-icon icon="lucide:search" width="18" style="color: #9ca3af;"></iconify-icon>
-                    <input type="text" placeholder="Cari laporan...">
-                </div>
-                <div class="topbar-right">
-                    <a href="#" style="color: var(--text-muted);"><iconify-icon icon="lucide:bell" width="22"></iconify-icon></a>
-                    <div class="user-profile" style="margin-left: 8px;">
-                        <div class="avatar"><?= $inisial ?></div>
-                        <div class="user-info">
-                            <h4><?= htmlspecialchars($nama_user) ?></h4>
-                            <p>MHS-2024</p>
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <?php include 'includes/topbar.php'; ?>
 
             <div class="page-header" style="text-align: left;">
                 <h2>Status Laporan</h2>

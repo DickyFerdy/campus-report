@@ -39,25 +39,7 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
 
         <main class="main-content">
             
-            <header class="topbar">
-                <div class="search-bar">
-                    <iconify-icon icon="lucide:search" width="18" style="color: #9ca3af;"></iconify-icon>
-                    <input type="text" placeholder="Cari laporan...">
-                </div>
-                <div class="topbar-right">
-                    <a href="#" style="color: var(--text-muted); display: flex; align-items: center;">
-                        <iconify-icon icon="lucide:bell" width="22"></iconify-icon>
-                    </a>
-                    
-                    <div class="user-profile" style="margin-left: 8px;">
-                        <div class="avatar"><?= $inisial ?></div>
-                        <div class="user-info">
-                            <h4><?= htmlspecialchars($nama_user) ?></h4>
-                            <p>MHS-2024</p>
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <?php include 'includes/topbar.php'; ?>
 
             <div class="dashboard-header">
                 <div>
@@ -105,7 +87,7 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
                 <div class="recent-reports-section">
                     <div class="section-title">
                         <span style="font-weight: 700;">Laporan Terkini</span>
-                        <a href="#">Lihat Semua</a>
+                        <a href="riwayat.php">Lihat Semua</a>
                     </div>
 
                     <?php if (count($recent_reports) > 0): ?>
@@ -171,27 +153,6 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
                         <a href="#" class="btn-outline" style="display: flex; justify-content: center; align-items: center; gap: 8px;">
                             <iconify-icon icon="lucide:phone-call" width="18"></iconify-icon> Layanan Darurat
                         </a>
-                    </div>
-
-                    <div class="stat-card">
-                        <h4 style="margin: 0 0 16px 0; color: var(--text-main);">Statistik Bulan Ini</h4>
-                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
-                            <span style="color: var(--text-muted); font-weight: 500;">Penyelesaian Laporan</span>
-                            <span style="font-weight: 700; color: var(--primary-color);">85%</span>
-                        </div>
-                        <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; margin-bottom: 24px;">
-                            <div style="width: 85%; height: 100%; background: var(--primary-color);"></div>
-                        </div>
-                        
-                        <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; align-items: center; gap: 12px;">
-                            <div style="color: #10b981; background: #d1fae5; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-                                <iconify-icon icon="lucide:trending-up" width="18"></iconify-icon>
-                            </div>
-                            <div>
-                                <p style="margin: 0 0 4px 0; font-size: 12px; color: var(--text-muted); font-weight: 500;">Laporan Selesai</p>
-                                <h5 style="margin: 0; font-size: 14px; color: var(--text-main);">+12 dari bulan lalu</h5>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
