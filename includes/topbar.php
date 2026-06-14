@@ -1,5 +1,7 @@
 <?php
-// includes/topbar.php
+if (!isset($conn)) {
+    die("<b>Critical Error:</b> Variabel koneksi database (<code>\$conn</code>) tidak ditemukan. Pastikan koneksi database telah diinisialisasi sebelum memanggil <code>topbar.php</code>.");
+}
 
 $topbar_nama = $_SESSION['nama_lengkap'] ?? 'Mahasiswa';
 $words = explode(" ", $topbar_nama);
@@ -14,7 +16,7 @@ if (empty($topbar_inisial)) $topbar_inisial = "M";
 $topbar_npm = $_SESSION['npm'] ?? '';
 
 // Jika NPM belum ada di Session, ambil langsung dari database
-if (empty($topbar_npm) && isset($conn)) {
+if (empty($topbar_npm)) {
     $stmt_npm = $conn->prepare("SELECT npm FROM users WHERE id = ?");
     $stmt_npm->bind_param("i", $_SESSION['user_id']);
     $stmt_npm->execute();
@@ -34,24 +36,25 @@ $teks_angkatan = "MHS-20" . $dua_digit; // Hasil akhir: "MHS-2024"
 
 $notif_items = [];
 $unread_count = 0;
+$user_id_notif = $_SESSION['user_id'];
 
-if (isset($conn)) {
-    $user_id_notif = $_SESSION['user_id'];
-    $stmt_notif = $conn->prepare("SELECT id, judul_laporan, status, updated_at, is_notif_read FROM reports WHERE user_id = ? AND status != 'Menunggu' ORDER BY updated_at DESC LIMIT 5");
-    $stmt_notif->bind_param("i", $user_id_notif);
-    $stmt_notif->execute();
-    $res_notif = $stmt_notif->get_result();
-    while ($row = $res_notif->fetch_assoc()) {
-        $notif_items[] = $row;
-        if ($row['is_notif_read'] == 0) {
-            $unread_count++; 
-        }
+// Query notifikasi langsung dieksekusi karena ketersediaan $conn sudah dijamin di baris atas
+$stmt_notif = $conn->prepare("SELECT id, judul_laporan, status, updated_at, is_notif_read FROM reports WHERE user_id = ? AND status != 'Menunggu' ORDER BY updated_at DESC LIMIT 5");
+$stmt_notif->bind_param("i", $user_id_notif);
+$stmt_notif->execute();
+$res_notif = $stmt_notif->get_result();
+while ($row = $res_notif->fetch_assoc()) {
+    $notif_items[] = $row;
+    if ($row['is_notif_read'] == 0) {
+        $unread_count++;
     }
-    $stmt_notif->close();
 }
+$stmt_notif->close();
+
 
 if (!function_exists('time_ago_notif')) {
-    function time_ago_notif($datetime) {
+    function time_ago_notif($datetime)
+    {
         $diff = time() - strtotime($datetime);
         if ($diff < 60) return "Baru saja";
         if ($diff < 3600) return floor($diff / 60) . " mnt lalu";
@@ -66,13 +69,13 @@ if (!function_exists('time_ago_notif')) {
         <iconify-icon icon="lucide:search" width="18" style="color: #9ca3af;"></iconify-icon>
         <input type="text" name="search" placeholder="Cari laporan..." style="border:none; outline:none; background:transparent; width:100%; margin-left:8px;" required>
     </form>
-    
+
     <div class="topbar-right" style="display: flex; align-items: center; gap: 16px;">
-        
+
         <div class="notif-wrapper" id="notifWrapper">
             <button class="notif-btn" id="notifBtn">
                 <iconify-icon icon="lucide:bell" width="22"></iconify-icon>
-                <?php if($unread_count > 0): ?>
+                <?php if ($unread_count > 0): ?>
                     <span class="notif-badge" id="notifBadge"></span>
                 <?php endif; ?>
             </button>
@@ -85,20 +88,26 @@ if (!function_exists('time_ago_notif')) {
                 <div class="notif-body">
                     <?php if (count($notif_items) > 0): ?>
                         <?php foreach ($notif_items as $n): ?>
-                            <?php 
-                                $st = strtolower($n['status']);
-                                $n_color = '#3b82f6'; $n_icon = 'lucide:loader-2'; $n_bg = '#eff6ff';
-                                $n_text = 'sedang diproses oleh teknisi.';
-                                
-                                if($st == 'selesai') { 
-                                    $n_color = '#10b981'; $n_icon = 'lucide:check-circle-2'; $n_bg = '#ecfdf5';
-                                    $n_text = 'telah selesai diperbaiki.';
-                                } elseif($st == 'ditolak') {
-                                    $n_color = '#ef4444'; $n_icon = 'lucide:x-circle'; $n_bg = '#fee2e2';
-                                    $n_text = 'ditolak oleh admin. Cek alasannya.';
-                                }
-                                
-                                $opacity = ($n['is_notif_read'] == 1) ? '0.6' : '1';
+                            <?php
+                            $st = strtolower($n['status']);
+                            $n_color = '#3b82f6';
+                            $n_icon = 'lucide:loader-2';
+                            $n_bg = '#eff6ff';
+                            $n_text = 'sedang diproses oleh teknisi.';
+
+                            if ($st == 'selesai') {
+                                $n_color = '#10b981';
+                                $n_icon = 'lucide:check-circle-2';
+                                $n_bg = '#ecfdf5';
+                                $n_text = 'telah selesai diperbaiki.';
+                            } elseif ($st == 'ditolak') {
+                                $n_color = '#ef4444';
+                                $n_icon = 'lucide:x-circle';
+                                $n_bg = '#fee2e2';
+                                $n_text = 'ditolak oleh admin. Cek alasannya.';
+                            }
+
+                            $opacity = ($n['is_notif_read'] == 1) ? '0.6' : '1';
                             ?>
                             <a href="detail_laporan.php?id=<?= $n['id'] ?>" class="notif-item" style="opacity: <?= $opacity ?>;">
                                 <div class="notif-icon-box" style="background-color: <?= $n_bg ?>; color: <?= $n_color ?>;">
@@ -120,7 +129,7 @@ if (!function_exists('time_ago_notif')) {
                 </div>
             </div>
         </div>
-        
+
         <div class="user-profile" style="margin-left: 8px; padding-left: 16px; border-left: 1px solid var(--border-color);">
             <div class="avatar"><?= $topbar_inisial ?></div>
             <div class="user-info">
@@ -137,7 +146,7 @@ if (!function_exists('time_ago_notif')) {
         const notifDropdown = document.getElementById('notifDropdown');
         const markReadBtn = document.getElementById('markReadBtn');
         const notifBadge = document.getElementById('notifBadge');
-        
+
         notifBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             notifDropdown.classList.toggle('show');
@@ -149,22 +158,22 @@ if (!function_exists('time_ago_notif')) {
             }
         });
 
-        if(markReadBtn) {
+        if (markReadBtn) {
             markReadBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 fetch('proses/tandai_dibaca.php')
-                .then(response => response.text())
-                .then(data => {
-                    if(data.trim() === 'success') {
-                        if(notifBadge) notifBadge.style.display = 'none';
-                        markReadBtn.innerText = 'Telah dibaca ✓';
-                        markReadBtn.style.color = 'var(--text-muted)';
-                        markReadBtn.style.cursor = 'default';
-                        document.querySelectorAll('.notif-item').forEach(item => {
-                            item.style.opacity = '0.6';
-                        });
-                    }
-                });
+                    .then(response => response.text())
+                    .then(data => {
+                        if (data.trim() === 'success') {
+                            if (notifBadge) notifBadge.style.display = 'none';
+                            markReadBtn.innerText = 'Telah dibaca ✓';
+                            markReadBtn.style.color = 'var(--text-muted)';
+                            markReadBtn.style.cursor = 'default';
+                            document.querySelectorAll('.notif-item').forEach(item => {
+                                item.style.opacity = '0.6';
+                            });
+                        }
+                    });
             });
         }
     });

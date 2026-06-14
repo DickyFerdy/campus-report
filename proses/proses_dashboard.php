@@ -1,10 +1,13 @@
 <?php
-session_start();
+// Tambahkan guard pengecekan session untuk keamanan dan mencegah error duplikasi
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 require_once __DIR__ . '/../config/koneksi.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 
@@ -46,4 +49,3 @@ while ($row = $result_recent->fetch_assoc()) {
     $recent_reports[] = $row;
 }
 $stmt_recent->close();
-?>

@@ -1,22 +1,33 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/proses/proses_dashboard.php';
+
+// Pengecekan session agar halaman tidak bisa diakses tanpa login
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - CampusReport</title>
     <link rel="stylesheet" href="assets/css/style.css?v=<?= time(); ?>">
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    
+
     <style>
         iconify-icon {
             display: inline-flex;
             justify-content: center;
             align-items: center;
         }
+
         /* style jika laporan kosong */
         .empty-state {
             text-align: center;
@@ -28,17 +39,18 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
         }
     </style>
 </head>
+
 <body class="dashboard-page">
 
     <div class="dashboard-layout">
-        
-        <?php 
-            $current_page = 'dashboard'; 
-            include 'includes/sidebar.php'; 
+
+        <?php
+        $current_page = 'dashboard';
+        include 'includes/sidebar.php';
         ?>
 
         <main class="main-content">
-            
+
             <?php include 'includes/topbar.php'; ?>
 
             <div class="dashboard-header">
@@ -83,7 +95,7 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
             </div>
 
             <div class="content-grid">
-                
+
                 <div class="recent-reports-section">
                     <div class="section-title">
                         <span style="font-weight: 700;">Laporan Terkini</span>
@@ -92,26 +104,26 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
 
                     <?php if (count($recent_reports) > 0): ?>
                         <?php foreach ($recent_reports as $report): ?>
-                            <?php 
-                                // Format warna badge status
-                                $status_lower = strtolower($report['status']); 
-                                if ($status_lower == 'menunggu') {
-                                    $status_class = 'menunggu';
-                                } elseif ($status_lower == 'diproses') {
-                                    $status_class = 'diproses';
-                                } elseif ($status_lower == 'selesai') {
-                                    $status_class = 'success';
-                                } elseif ($status_lower == 'ditolak') {
-                                    $status_class = 'ditolak';
-                                } else {
-                                    $status_class = 'kategori';
-                                }
-                                
-                                // Format tanggal dari database (Contoh: 24 Okt 2024)
-                                $tanggal_format = date('d M Y', strtotime($report['created_at']));
+                            <?php
+                            // Format warna badge status
+                            $status_lower = strtolower($report['status']);
+                            if ($status_lower == 'menunggu') {
+                                $status_class = 'menunggu';
+                            } elseif ($status_lower == 'diproses') {
+                                $status_class = 'diproses';
+                            } elseif ($status_lower == 'selesai') {
+                                $status_class = 'success';
+                            } elseif ($status_lower == 'ditolak') {
+                                $status_class = 'ditolak';
+                            } else {
+                                $status_class = 'kategori';
+                            }
 
-                                // Path gambar
-                                $img_src = !empty($report['foto_bukti']) ? 'assets/uploads/' . htmlspecialchars($report['foto_bukti']) : 'https://via.placeholder.com/150/e2e8f0/94a3b8?text=Foto';
+                            // Format tanggal dari database (Contoh: 24 Okt 2024)
+                            $tanggal_format = date('d M Y', strtotime($report['created_at']));
+
+                            // Path gambar
+                            $img_src = !empty($report['foto_bukti']) ? 'assets/uploads/' . htmlspecialchars($report['foto_bukti']) : 'https://via.placeholder.com/150/e2e8f0/94a3b8?text=Foto';
                             ?>
                             <div class="report-card">
                                 <img src="<?= $img_src ?>" alt="Foto Bukti" class="report-img">
@@ -167,4 +179,5 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
     </a>
 
 </body>
+
 </html>

@@ -1,6 +1,7 @@
 <?php
-// proses/proses_status.php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/../config/koneksi.php';
 
 // Cek sesi login
@@ -46,7 +47,7 @@ foreach ($words as $w) {
 $inisial = strtoupper(substr($inisial, 0, 2));
 
 // Fungsi Pembantu: Menghitung selisih waktu (Contoh: "2 Jam yang lalu")
-function time_ago($datetime) {
+function time_ago(string $datetime): string {
     $time = strtotime($datetime);
     $diff = time() - $time;
     
@@ -59,7 +60,7 @@ function time_ago($datetime) {
 
 // Fungsi Pembantu: Format Tanggal (Contoh: 24 Mei 2024)
 $bulan_indo = [1 => 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
-function format_tgl($datetime) {
+function format_tgl(string $datetime): string {
     global $bulan_indo;
     $ts = strtotime($datetime);
     return date('d', $ts) . ' ' . $bulan_indo[(int)date('m', $ts)] . ' ' . date('Y', $ts);

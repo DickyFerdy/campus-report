@@ -1,28 +1,45 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/proses/proses_riwayat.php';
+
+// Pengecekan session agar halaman tidak bisa diakses tanpa login
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riwayat Laporan - CampusReport</title>
     <link rel="stylesheet" href="assets/css/style.css?v=<?= time(); ?>">
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <style>iconify-icon { display: inline-flex; justify-content: center; align-items: center; }</style>
+    <style>
+        iconify-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
+
 <body class="dashboard-page">
 
     <div class="dashboard-layout">
-        
+
         <?php
-            $current_page = 'riwayat';
-            include 'includes/sidebar.php'; 
+        $current_page = 'riwayat';
+        include 'includes/sidebar.php';
         ?>
 
         <main class="main-content">
-            
+
             <?php include 'includes/topbar.php'; ?>
 
             <div class="history-header-wrapper">
@@ -30,7 +47,7 @@ require_once __DIR__ . '/proses/proses_riwayat.php';
                     <h2>Riwayat Laporan</h2>
                     <p>Lihat dan tinjau semua laporan yang telah Anda kirim,<br>lengkap dengan status penanganannya.</p>
                 </div>
-                
+
                 <div class="history-stats-group">
                     <div class="h-stat-card">
                         <p>Total Laporan</p>
@@ -57,7 +74,7 @@ require_once __DIR__ . '/proses/proses_riwayat.php';
                         <a href="riwayat.php?search=<?= urlencode($search) ?>&filter=selesai&sort=<?= $sort ?>" class="filter-tab <?= ($filter == 'selesai') ? 'active' : '' ?>">Selesai</a>
                         <a href="riwayat.php?search=<?= urlencode($search) ?>&filter=diproses&sort=<?= $sort ?>" class="filter-tab <?= ($filter == 'diproses') ? 'active' : '' ?>">Diproses</a>
                     </div>
-                    
+
                     <div style="display: flex; align-items: center; gap: 8px; border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 8px;">
                         <iconify-icon icon="lucide:list-filter" width="16" style="color: var(--text-muted);"></iconify-icon>
                         <select onchange="window.location.href=this.value" style="border:none; background:transparent; font-weight:600; color:var(--text-main); cursor:pointer; font-size:13px; outline:none;">
@@ -83,13 +100,13 @@ require_once __DIR__ . '/proses/proses_riwayat.php';
                     <tbody>
                         <?php if (count($reports) > 0): ?>
                             <?php foreach ($reports as $report): ?>
-                                <?php 
-                                    $status_db = strtolower($report['status']);
-                                    $badge_class = 'kategori'; // Default
-                                    if ($status_db == 'menunggu') $badge_class = 'menunggu';
-                                    if ($status_db == 'diproses') $badge_class = 'diproses';
-                                    if ($status_db == 'selesai') $badge_class = 'success';
-                                    if ($status_db == 'ditolak') $badge_class = 'ditolak';
+                                <?php
+                                $status_db = strtolower($report['status']);
+                                $badge_class = 'kategori'; // Default
+                                if ($status_db == 'menunggu') $badge_class = 'menunggu';
+                                if ($status_db == 'diproses') $badge_class = 'diproses';
+                                if ($status_db == 'selesai') $badge_class = 'success';
+                                if ($status_db == 'ditolak') $badge_class = 'ditolak';
                                 ?>
                                 <tr>
                                     <td>
@@ -124,31 +141,31 @@ require_once __DIR__ . '/proses/proses_riwayat.php';
                 </table>
 
                 <?php if ($total_pages > 1): ?>
-                <div class="pagination-wrapper">
-                    <div class="pagination-info">
-                        Menampilkan <?= count($reports) ?> dari <?= $total_rows ?> laporan
+                    <div class="pagination-wrapper">
+                        <div class="pagination-info">
+                            Menampilkan <?= count($reports) ?> dari <?= $total_rows ?> laporan
+                        </div>
+                        <div class="pagination">
+                            <?php if ($page > 1): ?>
+                                <a href="riwayat.php?search=<?= urlencode($search) ?>&filter=<?= $filter ?>&sort=<?= $sort ?>&page=<?= $page - 1 ?>" class="page-btn"><iconify-icon icon="lucide:chevron-left" width="16"></iconify-icon></a>
+                            <?php endif; ?>
+
+                            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                                <a href="riwayat.php?search=<?= urlencode($search) ?>&filter=<?= $filter ?>&sort=<?= $sort ?>&page=<?= $i ?>" class="page-btn <?= ($i == $page) ? 'active' : '' ?>"><?= $i ?></a>
+                            <?php endfor; ?>
+
+                            <?php if ($page < $total_pages): ?>
+                                <a href="riwayat.php?search=<?= urlencode($search) ?>&filter=<?= $filter ?>&sort=<?= $sort ?>&page=<?= $page + 1 ?>" class="page-btn"><iconify-icon icon="lucide:chevron-right" width="16"></iconify-icon></a>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                    <div class="pagination">
-                        <?php if ($page > 1): ?>
-                            <a href="riwayat.php?search=<?= urlencode($search) ?>&filter=<?= $filter ?>&sort=<?= $sort ?>&page=<?= $page - 1 ?>" class="page-btn"><iconify-icon icon="lucide:chevron-left" width="16"></iconify-icon></a>
-                        <?php endif; ?>
-                        
-                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <a href="riwayat.php?search=<?= urlencode($search) ?>&filter=<?= $filter ?>&sort=<?= $sort ?>&page=<?= $i ?>" class="page-btn <?= ($i == $page) ? 'active' : '' ?>"><?= $i ?></a>
-                        <?php endfor; ?>
-                        
-                        <?php if ($page < $total_pages): ?>
-                            <a href="riwayat.php?search=<?= urlencode($search) ?>&filter=<?= $filter ?>&sort=<?= $sort ?>&page=<?= $page + 1 ?>" class="page-btn"><iconify-icon icon="lucide:chevron-right" width="16"></iconify-icon></a>
-                        <?php endif; ?>
-                    </div>
-                </div>
                 <?php endif; ?>
             </div>
 
             <div class="bottom-widgets-grid">
                 <div class="action-widget" style="margin:0; position: relative; overflow: hidden;">
                     <iconify-icon icon="lucide:headset" width="180" style="position:absolute; right:-20px; bottom:-40px; opacity:0.1;"></iconify-icon>
-                    
+
                     <h3 style="font-weight: 700; font-size: 20px; margin-bottom: 12px;">Butuh Bantuan Mendesak?</h3>
                     <p style="font-size: 14px; margin-bottom: 24px; max-width: 80%;">Layanan darurat kampus tersedia 24/7 untuk menangani masalah keamanan kritis dan kecelakaan medis.</p>
                     <div style="display: flex; gap: 12px;">
@@ -171,4 +188,5 @@ require_once __DIR__ . '/proses/proses_riwayat.php';
     </div>
 
 </body>
+
 </html>

@@ -1,13 +1,15 @@
 <?php
-// proses/proses_detail.php
-session_start();
+// Pengecekan session agar aman dari error duplikasi
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Panggil database
 require_once __DIR__ . '/../config/koneksi.php';
 
 // 1. Cek Sesi (Aman dari error $nama_user)
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
 $user_id = $_SESSION['user_id'];
@@ -17,7 +19,7 @@ $nama_user = $_SESSION['nama_lengkap'] ?? 'Mahasiswa'; // Pakai fallback jika se
 $report_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($report_id === 0) {
-    header("Location: dashboard.php");
+    header("Location: ../dashboard.php");
     exit();
 }
 
@@ -41,7 +43,7 @@ $result = $stmt->get_result();
 
 // Jika laporan tidak ditemukan
 if ($result->num_rows === 0) {
-    header("Location: dashboard.php");
+    header("Location: ../dashboard.php");
     exit();
 }
 
@@ -50,14 +52,24 @@ $stmt->close();
 
 // 4. Logika SLA
 $prioritas = $detail['prioritas'] ?? 'Sedang'; // Cegah error undefined
-$sla = "24 Jam"; 
+$sla = "24 Jam";
 if ($prioritas == 'Tinggi') $sla = "12 Jam";
 if ($prioritas == 'Rendah') $sla = "48 Jam";
 
 // 5. Logika Tanggal Anti-Error
 $bulan_indo = [
-    1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
-    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    1 => 'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
 ];
 
 // Tanggal Pembuatan
@@ -76,4 +88,3 @@ foreach ($words as $w) {
 }
 $inisial = strtoupper(substr($inisial, 0, 2));
 if (empty($inisial)) $inisial = "M"; // Fallback jika nama kosong
-?>

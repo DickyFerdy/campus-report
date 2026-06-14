@@ -1,6 +1,7 @@
 <?php
-// proses/proses_riwayat.php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__ . '/../config/koneksi.php';
 
 if (!isset($_SESSION['user_id'])) {
@@ -82,11 +83,12 @@ foreach ($words as $w) {
 }
 $inisial = strtoupper(substr($inisial, 0, 2));
 
-// Format Tanggal
-$bulan_indo = [1 => 'Okt', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
-function format_tgl_riwayat($datetime) {
+// Format Tanggal (Perbaikan Array Bulan)
+$bulan_indo = [1 => 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
+
+function format_tgl_riwayat(string $datetime): string
+{
     global $bulan_indo;
     $ts = strtotime($datetime);
     return date('d', $ts) . ' ' . $bulan_indo[(int)date('m', $ts)] . '<br><span style="font-size:11px; color:#94a3b8;">' . date('Y', $ts) . '</span>';
 }
-?>

@@ -1,5 +1,8 @@
 <?php
-session_start();
+// Mengecek apakah session belum dimulai sebelum memanggil session_start()
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 include 'proses/proses_laporan.php';
 
@@ -20,6 +23,7 @@ $inisial = strtoupper(substr($inisial, 0, 2));
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,20 +31,25 @@ $inisial = strtoupper(substr($inisial, 0, 2));
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <style>
-        iconify-icon { display: inline-flex; justify-content: center; align-items: center; }
+        iconify-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
+
 <body class="dashboard-page">
 
     <div class="dashboard-layout">
-        
-        <?php 
-            $current_page = 'buat_laporan'; 
-            include 'includes/sidebar.php'; 
+
+        <?php
+        $current_page = 'buat_laporan';
+        include 'includes/sidebar.php';
         ?>
 
         <main class="main-content">
-            
+
             <?php include 'includes/topbar.php'; ?>
 
             <div class="page-header">
@@ -52,7 +61,7 @@ $inisial = strtoupper(substr($inisial, 0, 2));
 
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="form-card">
-                    
+
                     <div class="form-grid-2-col">
                         <div class="left-col">
                             <div class="form-group">
@@ -91,10 +100,10 @@ $inisial = strtoupper(substr($inisial, 0, 2));
                                 <div class="priority-group">
                                     <input type="radio" id="prioritas_rendah" name="prioritas" value="Rendah" required>
                                     <label for="prioritas_rendah">Rendah</label>
-                                    
+
                                     <input type="radio" id="prioritas_sedang" name="prioritas" value="Sedang">
                                     <label for="prioritas_sedang">Sedang</label>
-                                    
+
                                     <input type="radio" id="prioritas_tinggi" name="prioritas" value="Tinggi">
                                     <label for="prioritas_tinggi">Tinggi</label>
                                 </div>
@@ -134,7 +143,7 @@ $inisial = strtoupper(substr($inisial, 0, 2));
                     </div>
                     <p>Laporan Anda akan diteruskan ke teknisi terkait dalam waktu < 30 menit.</p>
                 </div>
-                
+
                 <div class="info-card">
                     <div class="info-card-header">
                         <iconify-icon icon="lucide:shield-check" width="20" style="color: var(--primary-color);"></iconify-icon>
@@ -163,4 +172,5 @@ $inisial = strtoupper(substr($inisial, 0, 2));
         });
     </script>
 </body>
+
 </html>

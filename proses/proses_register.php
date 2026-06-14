@@ -14,14 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // validasi input
     if (empty($nama_lengkap) || empty($npm) || empty($email) || empty($password) || empty($program_studi)) {
         $pesan = "<div class='alert-error'>Semua kolom wajib diisi!</div>";
-    } 
-    else if ($password !== $konfirmasi) {
+    } else if ($password !== $konfirmasi) {
         $pesan = "<div class='alert-error'>Password dan Konfirmasi tidak cocok!</div>";
-    } 
-    else if (!isset($_POST['syarat'])) {
+    } else if (!isset($_POST['syarat'])) {
         $pesan = "<div class='alert-error'>Anda harus menyetujui Syarat & Ketentuan.</div>";
-    } 
-    else {
+    } else {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $conn->prepare("INSERT INTO users (nama_lengkap, npm, email, password, program_studi) VALUES (?, ?, ?, ?, ?)");
@@ -40,12 +37,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $pesan = "<div class='alert-error'>Terjadi kesalahan: " . $e->getMessage() . "</div>";
             }
         }
-        
+
         if (isset($stmt) && $stmt instanceof mysqli_stmt) {
             $stmt->close();
         }
     }
 }
-
-$conn->close();
-?>

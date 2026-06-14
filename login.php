@@ -1,8 +1,12 @@
-<?php 
-include 'proses/proses_login.php'; 
+<?php
+// Cek apakah sesi sudah berjalan sebelum memulai sesi baru
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include 'proses/proses_login.php';
 
 // jika user sudah login, arahkan langsung ke dashboard
-if(isset($_SESSION['user_id'])){
+if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
     exit();
 }
@@ -10,17 +14,19 @@ if(isset($_SESSION['user_id'])){
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masuk - CampusReport</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
     <div class="login-container">
         <div class="logo">CampusReport</div>
-        
+
         <h2 class="title">Selamat Datang di<br>CampusReport</h2>
         <p class="subtitle">Laporkan kerusakan fasilitas kampus dengan mudah<br>dan pantau progresnya secara real-time.</p>
 
@@ -58,4 +64,5 @@ if(isset($_SESSION['user_id'])){
     </div>
 
 </body>
+
 </html>

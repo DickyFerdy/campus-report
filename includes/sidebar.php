@@ -1,12 +1,15 @@
 <?php
-$current_page = $current_page ?? 'dashboard'; 
+$current_page = $current_page ?? 'dashboard';
 ?>
 <aside class="sidebar">
     <div class="sidebar-brand">
         <div class="brand-icon"><iconify-icon icon="lucide:graduation-cap" width="24"></iconify-icon></div>
-        <div class="brand-text"><h3>CampusReport</h3><p>Akun Mahasiswa</p></div>
+        <div class="brand-text">
+            <h3>CampusReport</h3>
+            <p>Akun Mahasiswa</p>
+        </div>
     </div>
-    
+
     <ul class="nav-menu">
         <li class="nav-item <?= ($current_page == 'dashboard') ? 'active' : '' ?>">
             <a href="dashboard.php"><iconify-icon icon="lucide:layout-dashboard" width="20"></iconify-icon> Dashboard</a>
@@ -21,7 +24,7 @@ $current_page = $current_page ?? 'dashboard';
             <a href="riwayat.php"><iconify-icon icon="lucide:history" width="20"></iconify-icon> Riwayat</a>
         </li>
     </ul>
-    
+
     <div class="sidebar-bottom">
         <ul class="nav-menu">
             <li class="nav-item">

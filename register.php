@@ -1,20 +1,22 @@
-<?php 
-include 'proses/proses_register.php'; 
+<?php
+include 'proses/proses_register.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Akun - CampusReport</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
     <div class="register-container">
         <div class="logo">CampusReport</div>
-        
+
         <h2 class="title">Daftar Akun CampusReport</h2>
         <p class="subtitle">Bergabunglah untuk melaporkan dan memantau<br>fasilitas kampus dengan mudah.</p>
 
@@ -61,7 +63,8 @@ include 'proses/proses_register.php';
 
             <div class="checkbox-group">
                 <input type="checkbox" name="syarat" id="syarat" required>
-                <label for="agree">
+                <!-- FIX: for="syarat" (sebelumnya for="agree" sehingga klik label tidak memicu checkbox) -->
+                <label for="syarat">
                     Saya menyetujui <a href="syarat_ketentuan.php" target="_blank" style="color: var(--primary-color); font-weight: 700; text-decoration: none;">Syarat & Ketentuan</a> yang berlaku di platform ini.
                 </label>
             </div>
@@ -75,4 +78,5 @@ include 'proses/proses_register.php';
     </div>
 
 </body>
+
 </html>
