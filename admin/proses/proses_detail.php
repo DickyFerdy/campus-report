@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../config/koneksi.php';
 
 // Proteksi akses admin
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: ../login.php");
+    header("Location: index.php");
     exit();
 }
 

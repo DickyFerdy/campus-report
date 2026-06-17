@@ -3,7 +3,7 @@ session_start();
 require_once __DIR__ . '/../../config/koneksi.php';
 
 if (isset($_SESSION['admin_id'])) {
-    header("Location: index.php");
+    header("Location: dashboard.php");
     exit();
 }
 
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['admin_id']   = $admin['id'];
                 $_SESSION['admin_nama'] = $admin['nama_admin'];
                 
-                header("Location: index.php");
+                header("Location: dashboard.php");
                 exit();
             } else {
                 $pesan = "<div class='alert-error'><iconify-icon icon='lucide:lock'></iconify-icon> Akses Ditolak: Password salah!</div>";
