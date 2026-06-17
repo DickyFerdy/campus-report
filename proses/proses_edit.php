@@ -6,7 +6,7 @@ require_once __DIR__ . '/../config/koneksi.php';
 
 // 1. Cek Sesi Login
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php");
+    header("Location: login.php");
     exit();
 }
 

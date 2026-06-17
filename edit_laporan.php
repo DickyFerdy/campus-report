@@ -1,15 +1,5 @@
 <?php
-// Tambahkan pengecekan session untuk keamanan
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 require_once __DIR__ . '/proses/proses_edit.php';
-
-// Proteksi halaman jika belum login
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
 ?>
 
 <!DOCTYPE html>

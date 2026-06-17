@@ -1,15 +1,5 @@
 <?php
-// Cek apakah sesi sudah berjalan sebelum memulai sesi baru
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 include 'proses/proses_login.php';
-
-// jika user sudah login, arahkan langsung ke dashboard
-if (isset($_SESSION['user_id'])) {
-    header("Location: dashboard.php");
-    exit();
-}
 ?>
 
 <!DOCTYPE html>

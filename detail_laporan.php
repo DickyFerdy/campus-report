@@ -1,15 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-// Memanggil logika proses detail laporan;
 require_once __DIR__ . '/proses/proses_detail.php';
-
-// Pengecekan session agar halaman tidak bisa diakses tanpa login
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
 
 // Menyiapkan Badge Status & Logika Timeline
 $status = strtolower($detail['status']);

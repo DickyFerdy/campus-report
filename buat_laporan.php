@@ -1,24 +1,5 @@
 <?php
-// Mengecek apakah session belum dimulai sebelum memanggil session_start()
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-include 'proses/proses_laporan.php';
-
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
-
-$nama_user = $_SESSION['nama_lengkap'];
-
-$words = explode(" ", $nama_user);
-$inisial = "";
-foreach ($words as $w) {
-    $inisial .= mb_substr($w, 0, 1);
-}
-$inisial = strtoupper(substr($inisial, 0, 2));
+include __DIR__ . '/proses/proses_laporan.php'
 ?>
 
 <!DOCTYPE html>

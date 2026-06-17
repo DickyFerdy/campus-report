@@ -9,7 +9,7 @@ require_once __DIR__ . '/../config/koneksi.php';
 
 // 1. Cek Sesi (Aman dari error $nama_user)
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php");
+    header("Location: login.php");
     exit();
 }
 $user_id = $_SESSION['user_id'];
