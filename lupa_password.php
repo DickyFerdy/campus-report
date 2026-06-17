@@ -1,4 +1,11 @@
-<?php include 'proses/proses_lupa_password.php'; ?>
+<?php
+include 'proses/proses_lupa_password.php';
+
+if(isset($_SESSION['user_id'])){
+    header("Location: dashboard.php");
+    exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="id">

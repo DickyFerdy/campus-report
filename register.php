@@ -1,5 +1,10 @@
 <?php
 include 'proses/proses_register.php';
+
+if(isset($_SESSION['user_id'])){
+    header("Location: dashboard.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
