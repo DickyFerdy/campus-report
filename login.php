@@ -171,13 +171,13 @@ if (isset($_SESSION['user_id'])) {
     <script>
         // Fungsi untuk mengganti antar tab Mahasiswa dan Admin
         function switchRole(role) {
-            // Hapus status active dari semua tombol dan form
+            // Menghapus status active dari semua tombol dan form
             document.getElementById('btn-mahasiswa').classList.remove('active');
             document.getElementById('btn-admin').classList.remove('active');
             document.getElementById('form-mahasiswa').classList.remove('active');
             document.getElementById('form-admin').classList.remove('active');
 
-            // Tambahkan status active ke tombol dan form yang dipilih
+            // Menambahkan status active ke tombol dan form yang dipilih
             if (role === 'mahasiswa') {
                 document.getElementById('btn-mahasiswa').classList.add('active');
                 document.getElementById('form-mahasiswa').classList.add('active');

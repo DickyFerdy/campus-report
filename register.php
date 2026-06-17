@@ -68,7 +68,6 @@ if (isset($_SESSION['user_id'])) {
 
             <div class="checkbox-group">
                 <input type="checkbox" name="syarat" id="syarat" required>
-                <!-- FIX: for="syarat" (sebelumnya for="agree" sehingga klik label tidak memicu checkbox) -->
                 <label for="syarat">
                     Saya menyetujui <a href="syarat_ketentuan.php" target="_blank" style="color: var(--primary-color); font-weight: 700; text-decoration: none;">Syarat & Ketentuan</a> yang berlaku di platform ini.
                 </label>

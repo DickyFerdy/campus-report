@@ -1,5 +1,5 @@
 <?php
-// Cek apakah sesi sudah berjalan sebelum memulai sesi baru
+// Mengecek apakah sesi sudah berjalan sebelum memulai sesi baru
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

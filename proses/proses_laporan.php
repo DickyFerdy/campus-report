@@ -1,5 +1,5 @@
 <?php
-// Tambahkan pengecekan session untuk memastikan $_SESSION bisa diakses dengan aman
+// Menambahkan pengecekan session untuk memastikan $_SESSION bisa diakses dengan aman
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

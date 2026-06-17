@@ -31,7 +31,7 @@ $stmt = $conn->prepare("
     WHERE r.id = ? AND r.user_id = ?
 ");
 
-// Jika Query gagal (misal karena belum ALTER TABLE), tampilkan error jelas!
+// Jika Query gagal, tampilkan error jelas!
 if (!$stmt) {
     die("<h3 style='color:red;'>ERROR DATABASE:</h3> <p>" . $conn->error . "</p> 
          <p>Pastikan Anda sudah menjalankan ALTER TABLE untuk menambahkan <b>respon_admin</b> dan <b>updated_at</b>.</p>");

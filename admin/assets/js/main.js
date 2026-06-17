@@ -81,7 +81,9 @@
           var rows = table.querySelectorAll("tbody tr");
 
           Array.prototype.forEach.call(rows, function (row) {
-            row.hidden = query !== "" && row.textContent.toLowerCase().indexOf(query) === -1;
+            row.hidden =
+              query !== "" &&
+              row.textContent.toLowerCase().indexOf(query) === -1;
           });
         });
       });
@@ -118,7 +120,10 @@
     function toggleSidebar() {
       if (isDesktop()) {
         body.classList.toggle("sidebar-mini");
-        saveMiniState(storageAvailable, body.classList.contains("sidebar-mini"));
+        saveMiniState(
+          storageAvailable,
+          body.classList.contains("sidebar-mini"),
+        );
       } else {
         body.classList.toggle("sidebar-open");
       }

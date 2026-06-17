@@ -3,8 +3,8 @@
         <a class="brand-mark" href="dashboard.php" aria-label="admin dashboard">
             <span class="brand-icon"><iconify-icon icon="lucide:user-check" width="24"></iconify-icon></span>
             <span class="brand-copy">
-            <span class="brand-title">Admin / Pengelola</span>
-            <span class="brand-subtitle">Admin Console</span>
+                <span class="brand-title">Admin / Pengelola</span>
+                <span class="brand-subtitle">Admin Console</span>
             </span>
         </a>
     </div>
