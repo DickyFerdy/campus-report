@@ -1,5 +1,5 @@
 <?php
-// Pastikan proses login sudah disesuaikan untuk menerima parameter role (mahasiswa/admin)
+// Memastikan proses login sudah disesuaikan untuk menerima parameter role (mahasiswa/admin)
 include 'proses/proses_login.php';
 
 if (isset($_SESSION['user_id'])) {
@@ -45,7 +45,6 @@ if (isset($_SESSION['user_id'])) {
 
         .role-btn.active {
             background-color: #0056b3;
-            /* Sesuaikan dengan warna biru primary Anda */
             color: white;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }

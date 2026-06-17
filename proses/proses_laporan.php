@@ -29,13 +29,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // 2. Proses Upload Foto Bukti
         $foto_bukti = "";
 
-        // Cek apakah ada file yang diupload dan tidak ada error
+        // Mengecek apakah ada file yang diupload dan tidak ada error
         if (isset($_FILES['foto_bukti']) && $_FILES['foto_bukti']['error'] === UPLOAD_ERR_OK) {
             $file_tmp  = $_FILES['foto_bukti']['tmp_name'];
             $file_name = $_FILES['foto_bukti']['name'];
             $file_size = $_FILES['foto_bukti']['size'];
 
-            // Ambil ekstensi file (misal: jpg, png)
+            // Mengambil ekstensi file (misal: jpg, png)
             $ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
             $allowed_ext = ['png', 'jpg', 'jpeg'];
 
@@ -47,14 +47,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             else if ($file_size > 5242880) {
                 $pesan = "<div class='alert-error'>Ukuran foto maksimal 5MB!</div>";
             } else {
-                // Buat nama file unik (contoh: rep_65a8b9c.jpg) agar tidak saling timpa
+                // Membuat nama file unik agar tidak saling timpa
                 $new_file_name = uniqid('rep_', true) . '.' . $ext;
 
-                // Tentukan lokasi penyimpanan file
+                // Menentukan lokasi penyimpanan file
                 $upload_path = __DIR__ . '/../assets/uploads/';
                 $destination = $upload_path . $new_file_name;
 
-                // Pindahkan file dari penyimpanan sementara ke folder uploads
+                // Memindahkan file dari penyimpanan sementara ke folder uploads
                 if (move_uploaded_file($file_tmp, $destination)) {
                     $foto_bukti = $new_file_name;
                 } else {
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pesan = "<div class='alert-error'>Foto bukti wajib diunggah!</div>";
         }
 
-        // 3. Simpan ke Database (Jika tidak ada error dan foto berhasil diupload)
+        // 3. Menyimpan ke Database (Jika tidak ada error dan foto berhasil diupload)
         if (empty($pesan) && !empty($foto_bukti)) {
             $stmt = $conn->prepare("INSERT INTO reports (user_id, judul_laporan, kategori, gedung, detail_lokasi, prioritas, deskripsi, foto_bukti) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 

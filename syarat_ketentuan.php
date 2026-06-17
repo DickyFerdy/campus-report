@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Syarat & Ketentuan Penggunaan - CampusReport</title>
     <link rel="stylesheet" href="assets/css/style.css?v=<?= time(); ?>">
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <style>iconify-icon { display: inline-flex; justify-content: center; align-items: center; }</style>
+    <style>
+        iconify-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
+
 <body style="background-color: var(--bg-body);">
 
     <div class="doc-container">
         <div class="doc-card">
-            
+
             <div class="doc-title-section">
                 <h1>Syarat & Ketentuan</h1>
                 <p>Terakhir Diperbarui: 13 Juni 2026 • Versi 1.1</p>
@@ -80,4 +88,5 @@
     </div>
 
 </body>
+
 </html>

@@ -28,10 +28,10 @@ if (empty($topbar_npm)) {
     $stmt_npm->close();
 }
 
-// Ambil 2 digit pertama (Contoh: "24081..." menjadi "24")
+// Mengambil 2 digit pertama dari NPM untuk menentukan angkatan
 $dua_digit = substr($topbar_npm, 0, 2);
 if (empty($dua_digit)) $dua_digit = "24"; // Fallback aman
-$teks_angkatan = "MHS-20" . $dua_digit; // Hasil akhir: "MHS-2024"
+$teks_angkatan = "MHS-20" . $dua_digit;
 // --------------------------------------------
 
 $notif_items = [];
@@ -53,7 +53,7 @@ $stmt_notif->close();
 
 
 if (!function_exists('time_ago_notif')) {
-    function time_ago_notif($datetime)
+    function time_ago_notif(string $datetime): string
     {
         $diff = time() - strtotime($datetime);
         if ($diff < 60) return "Baru saja";

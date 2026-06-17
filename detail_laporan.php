@@ -16,7 +16,7 @@ if ($status == 'menunggu') {
     $badge_class = 'kategori';
 }
 
-// Format ID (Contoh ID 12 menjadi #CR-0012)
+// Format ID Laporan
 $format_id = "#CR-" . str_pad($detail['id'], 4, "0", STR_PAD_LEFT);
 ?>
 

@@ -19,7 +19,7 @@ $sort   = isset($_GET['sort']) ? strtolower($_GET['sort']) : 'terbaru';
 $page   = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) $page = 1;
 
-// 1. Ambil Statistik Cepat (Total & Selesai)
+// 1. Mengambil Statistik Cepat (Total & Selesai)
 $stat_total = 0;
 $stat_selesai = 0;
 $stmt_stat = $conn->prepare("SELECT status, COUNT(*) as jml FROM reports WHERE user_id = ? GROUP BY status");
@@ -50,7 +50,7 @@ if ($filter !== 'semua') {
     $types .= "s";
 }
 
-// Hitung total baris untuk Pagination
+// Menghitung total baris untuk Pagination
 $sql_count = "SELECT COUNT(id) as total " . $sql_base;
 $stmt_count = $conn->prepare($sql_count);
 $stmt_count->bind_param($types, ...$params);
@@ -63,7 +63,7 @@ $limit = 5; // Menampilkan 5 laporan per halaman
 $total_pages = ceil($total_rows / $limit);
 $offset = ($page - 1) * $limit;
 
-// Ambil Data Laporan (Tambahkan Sort & Limit)
+// Mengambil Data Laporan (Tambahkan Sort & Limit)
 $order_sql = ($sort === 'terlama') ? 'ASC' : 'DESC';
 $sql_data = "SELECT * " . $sql_base . " ORDER BY created_at " . $order_sql . " LIMIT ? OFFSET ?";
 $types .= "ii";
@@ -83,7 +83,7 @@ foreach ($words as $w) {
 }
 $inisial = strtoupper(substr($inisial, 0, 2));
 
-// Format Tanggal (Perbaikan Array Bulan)
+// Format Tanggal
 $bulan_indo = [1 => 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
 
 function format_tgl_riwayat(string $datetime): string

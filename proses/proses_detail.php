@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Panggil database
 require_once __DIR__ . '/../config/koneksi.php';
 
-// 1. Cek Sesi (Aman dari error $nama_user)
+// 1. Mengecek Sesi (Aman dari error $nama_user)
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -23,7 +23,7 @@ if ($report_id === 0) {
     exit();
 }
 
-// 3. Query Super Aman (Ada pengecekan error SQL)
+// 3. Pengecekan error SQL
 $stmt = $conn->prepare("
     SELECT r.*, u.nama_lengkap, u.npm 
     FROM reports r 

@@ -1,7 +1,7 @@
 <?php
 include 'proses/proses_lupa_password.php';
 
-if(isset($_SESSION['user_id'])){
+if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
     exit();
 }
@@ -9,6 +9,7 @@ if(isset($_SESSION['user_id'])){
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,36 +20,76 @@ if(isset($_SESSION['user_id'])){
         /* Desain Khusus Centered Auth Page */
         body.auth-body {
             background-color: var(--bg-body);
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; margin: 0; padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
         }
+
         .auth-card-centered {
             background: var(--bg-surface);
-            padding: 40px; border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.05);
-            width: 100%; max-width: 420px;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 420px;
         }
+
         .auth-brand {
-            text-align: center; margin-bottom: 24px;
+            text-align: center;
+            margin-bottom: 24px;
         }
+
         .auth-brand .icon-box {
-            background-color: var(--primary-focus); color: var(--primary-color);
-            width: 48px; height: 48px; border-radius: 12px;
-            display: inline-flex; justify-content: center; align-items: center; margin-bottom: 12px;
+            background-color: var(--primary-focus);
+            color: var(--primary-color);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 12px;
         }
-        .auth-brand h2 { margin: 0 0 6px 0; font-size: 22px; color: var(--text-main); }
-        .auth-brand p { margin: 0; font-size: 13px; color: var(--text-muted); line-height: 1.5; }
-        
+
+        .auth-brand h2 {
+            margin: 0 0 6px 0;
+            font-size: 22px;
+            color: var(--text-main);
+        }
+
+        .auth-brand p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
         .form-footer-link {
-            text-align: center; margin-top: 24px; font-size: 13px; color: var(--text-muted);
+            text-align: center;
+            margin-top: 24px;
+            font-size: 13px;
+            color: var(--text-muted);
         }
+
         .form-footer-link a {
-            color: var(--primary-color); font-weight: 700; text-decoration: none;
-            display: inline-flex; align-items: center; gap: 4px; transition: 0.2s;
+            color: var(--primary-color);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: 0.2s;
         }
-        .form-footer-link a:hover { text-decoration: underline; }
+
+        .form-footer-link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
+
 <body class="auth-body">
 
     <div class="auth-card-centered">
@@ -92,4 +133,5 @@ if(isset($_SESSION['user_id'])){
     </div>
 
 </body>
+
 </html>
