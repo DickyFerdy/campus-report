@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 // Memanggil database
 require_once __DIR__ . '/../config/koneksi.php';
 
-// 1. Cek Sesi (Aman dari error $nama_user)
+// 1. Mengecek Sesi (Aman dari error $nama_user)
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -15,7 +15,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $nama_user = $_SESSION['nama_lengkap'] ?? 'Mahasiswa'; // Pakai fallback jika session kosong
 
-// 2. Ambil ID dari URL
+// 2. Mengambil ID dari URL
 $report_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($report_id === 0) {

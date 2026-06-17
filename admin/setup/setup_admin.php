@@ -9,7 +9,7 @@ require_once '../../config/koneksi.php';
 
 $email = 'admin@universitas.ac.id';
 
-// CEK APAKAH ADMIN SUDAH ADA SEBELUM INSERT
+// MENGECEK APAKAH ADMIN SUDAH ADA SEBELUM INSERT
 $stmt_check = $conn->prepare("SELECT id FROM admins WHERE email = ?");
 $stmt_check->bind_param("s", $email);
 $stmt_check->execute();
