@@ -107,8 +107,6 @@ require_once __DIR__ . '/proses/proses_laporan.php';
                                         if ($st == 'selesai') $badge_class = 'success';
                                         if ($st == 'ditolak') $badge_class = 'ditolak';
 
-                                        // Nonaktifkan tombol ACC/Tolak jika status sudah final
-                                        $disabled = ($st == 'selesai' || $st == 'ditolak') ? 'disabled' : '';
                                         ?>
                                         <tr>
                                             <td>
@@ -117,7 +115,6 @@ require_once __DIR__ . '/proses/proses_laporan.php';
                                             </td>
                                             <td>
                                                 <?php
-                                                // Memisahkan nama depan dan belakang agar rapi bertumpuk seperti desain
                                                 $nm = explode(" ", htmlspecialchars($report['pelapor']));
                                                 echo "<span style='color:var(--text-main); font-size:13px; font-weight: 500;'>" . $nm[0] .  "</span><br>";
                                                 echo "<span style='color:var(--text-main); font-size:13px; font-weight: 500;' class='td-sub'>" . (isset($nm[1]) ? $nm[1] : '') . "</span>";
@@ -132,11 +129,9 @@ require_once __DIR__ . '/proses/proses_laporan.php';
                                             <td><span class="badge <?= $badge_class ?>"><?= strtoupper($report['status']) ?></span></td>
                                             <td>
                                                 <div class="aksi-icons">
-                                                    <a href="detail_laporan_admin.php?id=<?= $report['id'] ?>" class="icon-btn icon-view" title="Lihat Detail"><iconify-icon icon="lucide:eye"></iconify-icon></a>
-
-                                                    <a href="#" class="icon-btn icon-approve <?= $disabled ?>" title="Proses Laporan"><iconify-icon icon="lucide:check-circle"></iconify-icon></a>
-
-                                                    <a href="#" class="icon-btn icon-reject <?= $disabled ?>" title="Tolak Laporan"><iconify-icon icon="lucide:x-circle"></iconify-icon></a>
+                                                    <a href="detail_laporan_admin.php?id=<?= (int)$report['id'] ?>" class="icon-btn icon-view" title="Lihat Detail">
+                                                        <iconify-icon icon="lucide:eye"></iconify-icon>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>

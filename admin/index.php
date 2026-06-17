@@ -9,7 +9,6 @@ require_once __DIR__ . '/proses/proses_login.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin - CampusReport</title>
-    <!-- Memanggil CSS dari luar folder admin -->
     <link rel="stylesheet" href="../assets/css/style.css?v=<?= time(); ?>">
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 </head>
@@ -55,12 +54,6 @@ require_once __DIR__ . '/proses/proses_login.php';
                 </button>
             </div>
 
-            <div class="input-with-icon">
-                <label for="twofa">Kode Verifikasi (2FA) <iconify-icon icon="lucide:info" style="color:#94a3b8;"></iconify-icon></label>
-                <iconify-icon icon="lucide:shield-plus" class="left-icon"></iconify-icon>
-                <input type="text" id="twofa" name="twofa" placeholder="6-digit code (Opsional)" autocomplete="off">
-            </div>
-
             <div style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; color: var(--text-muted); margin-bottom: 24px; text-align: left;">
                 <input type="checkbox" name="remember" id="remember">
                 <label for="remember" style="cursor: pointer; margin: 0;">Ingat saya</label>
@@ -74,7 +67,6 @@ require_once __DIR__ . '/proses/proses_login.php';
         Internal Security Protocol Active
     </div>
 
-    <!-- Script Mata Password -->
     <script>
         document.getElementById('togglePwd').addEventListener('click', function() {
             const pwdInput = document.getElementById('password');

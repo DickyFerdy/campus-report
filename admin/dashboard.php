@@ -133,7 +133,7 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
                                             </td>
                                             <td><span class="badge <?= $badge_class ?>"><?= ucfirst(htmlspecialchars($report['status'])) ?></span></td>
                                             <td>
-                                                <a href="detail_laporan_admin.php?id=<?= $report['id'] ?>" class="btn-action-light">Lihat Detail</a>
+                                                <a href="detail_laporan_admin.php?id=<?= (int)$report['id'] ?>" class="btn-action-light">Lihat Detail</a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
