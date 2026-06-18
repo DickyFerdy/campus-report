@@ -69,6 +69,13 @@ $format_id = "#CR-" . str_pad($detail['id'], 4, "0", STR_PAD_LEFT);
                         <a href="edit_laporan.php?id=<?= $report_id ?>" class="btn-primary">
                             <iconify-icon icon="lucide:edit-2" width="16"></iconify-icon> Edit Laporan
                         </a>
+
+                        <a href="proses/hapus_laporan.php?id=<?= $report_id ?>"
+                            style="background-color: #ef4444; color: white; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; text-decoration: none; transition: 0.2s;"
+                            onclick="return confirm('Yakin ingin membatalkan dan menghapus laporan ini? Data yang dihapus tidak dapat dikembalikan.');">
+                            <iconify-icon icon="lucide:trash-2" width="16"></iconify-icon> Hapus Laporan
+                        </a>
+
                     <?php endif; ?>
                 </div>
             </div>

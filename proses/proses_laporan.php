@@ -73,7 +73,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("isssssss", $user_id, $judul_laporan, $kategori, $gedung, $detail_lokasi, $prioritas, $deskripsi, $foto_bukti);
 
             if ($stmt->execute()) {
-                $pesan = "<div class='alert-success'>Laporan berhasil dikirim! Teknisi kami akan segera meninjaunya.</div>";
+                // Menyimpan pesan sukses ke dalam session
+                $_SESSION['sukses_laporan'] = "Laporan berhasil dikirim! Teknisi kami akan segera meninjaunya.";
+
+                // Diarahkan (redirect) kembali ke dashboard
+                header("Location: dashboard.php");
+                exit();
             } else {
                 $pesan = "<div class='alert-error'>Terjadi kesalahan database: " . $stmt->error . "</div>";
             }

@@ -44,6 +44,13 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
 
             <?php include 'includes/topbar.php'; ?>
 
+            <?php if (isset($_SESSION['sukses_laporan'])): ?>
+                <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 14px 16px; border-radius: 8px; margin-bottom: 24px; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <iconify-icon icon="lucide:check-circle" width="18"></iconify-icon>
+                    <span><?= $_SESSION['sukses_laporan']; ?></span>
+                </div>
+                <?php unset($_SESSION['sukses_laporan']); ?>
+            <?php endif; ?>
             <div class="dashboard-header">
                 <div>
                     <h1>Dashboard</h1>
