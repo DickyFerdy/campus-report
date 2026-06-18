@@ -1,5 +1,5 @@
 <?php
-// Memastikan proses login sudah disesuaikan untuk menerima parameter role (mahasiswa/admin)
+session_start();
 include 'proses/proses_login.php';
 
 if (isset($_SESSION['user_id'])) {
@@ -83,9 +83,18 @@ if (isset($_SESSION['user_id'])) {
             <button type="button" class="role-btn" id="btn-admin" onclick="switchRole('admin')">Admin / Pengelola</button>
         </div>
 
-        <?= isset($pesan) ? $pesan : '' ?>
-
+        <!-- ================= FORM MAHASISWA ================= -->
         <div id="form-mahasiswa" class="form-section active">
+
+            <!-- PESAN ERROR MAHASISWA DARI SESSION -->
+            <?php if (isset($_SESSION['error_mhs'])): ?>
+                <div style="color: #dc2626; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px; margin-bottom: 20px; text-align: center; font-size: 14px;">
+                    <?= $_SESSION['error_mhs']; ?>
+                </div>
+                <?php unset($_SESSION['error_mhs']); // Hapus pesan setelah ditampilkan 
+                ?>
+            <?php endif; ?>
+
             <h2 class="title" style="text-align: center;">Selamat Datang di<br>CampusReport</h2>
             <p class="subtitle" style="text-align: center;">Laporkan kerusakan fasilitas kampus dengan mudah<br>dan pantau progresnya secara real-time.</p>
 
@@ -122,11 +131,14 @@ if (isset($_SESSION['user_id'])) {
             </div>
         </div>
 
+        <!-- ================= FORM ADMIN ================= -->
         <div id="form-admin" class="form-section">
             <div class="admin-icon-lock" style="text-align: center; font-size: 40px; color: #0056b3;">
                 <iconify-icon icon="lucide:shield-check"></iconify-icon>
             </div>
             <h2 style="text-align: center;">Login Admin CampusReport</h2>
+
+            <!-- PESAN ERROR ADMIN DARI SESSION -->
             <?php if (isset($_SESSION['error_admin'])): ?>
                 <div style="color: #dc2626; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px; margin-bottom: 20px; text-align: center; font-size: 14px;">
                     <iconify-icon icon="lucide:x-circle" style="vertical-align: middle; margin-right: 5px;"></iconify-icon>
@@ -135,6 +147,7 @@ if (isset($_SESSION['user_id'])) {
                 <?php unset($_SESSION['error_admin']); // Hapus pesan setelah ditampilkan 
                 ?>
             <?php endif; ?>
+
             <p class="subtitle" style="text-align: center;">Masuk ke dashboard pengelola untuk memverifikasi dan menindaklanjuti laporan.</p>
 
             <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 16px; display: flex; align-items: flex-start; gap: 12px; text-align: left; margin-bottom: 24px;">
@@ -179,21 +192,35 @@ if (isset($_SESSION['user_id'])) {
     <script>
         // Fungsi untuk mengganti antar tab Mahasiswa dan Admin
         function switchRole(role) {
-            // Menghapus status active dari semua tombol dan form
             document.getElementById('btn-mahasiswa').classList.remove('active');
             document.getElementById('btn-admin').classList.remove('active');
             document.getElementById('form-mahasiswa').classList.remove('active');
             document.getElementById('form-admin').classList.remove('active');
 
-            // Menambahkan status active ke tombol dan form yang dipilih
             if (role === 'mahasiswa') {
                 document.getElementById('btn-mahasiswa').classList.add('active');
                 document.getElementById('form-mahasiswa').classList.add('active');
+
+                // Ubah URL secara visual tanpa reload, menghapus ?tab=admin jika ada
+                window.history.replaceState({}, document.title, window.location.pathname);
+
             } else if (role === 'admin') {
                 document.getElementById('btn-admin').classList.add('active');
                 document.getElementById('form-admin').classList.add('active');
+
+                // Tambahkan ?tab=admin ke URL
+                window.history.replaceState({}, document.title, window.location.pathname + "?tab=admin");
             }
         }
+
+        // Fungsi untuk membaca URL saat halaman dimuat
+        // Jika ada ?tab=admin, langsung buka tab admin
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('tab') === 'admin') {
+                switchRole('admin');
+            }
+        });
 
         // Fungsi untuk toggle password pada form admin
         document.getElementById('togglePwd').addEventListener('click', function() {
