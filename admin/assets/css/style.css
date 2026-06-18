@@ -2509,3 +2509,24 @@ html[data-theme="dark"] {
   margin-bottom: 20px;
   border: 1px solid #fecaca;
 }
+
+/* --- HOTFIX SIDEBAR PUTIH --- */
+.sidebar {
+    background-color: #ffffff !important; /* Memaksa background menjadi putih */
+    border-right: 1px solid var(--border-color); /* Memberikan garis batas di kanan */
+    color: var(--text-main);
+}
+
+.sidebar .nav-menu .nav-item a {
+    color: #64748b !important; /* Warna teks menu abu-abu kebiruan */
+}
+
+.sidebar .nav-menu .nav-item.active a {
+    background-color: #eff6ff !important; /* Background biru muda saat aktif */
+    color: var(--primary-color) !important; /* Teks biru tua saat aktif */
+    font-weight: 700;
+}
+
+.sidebar-brand h3, .brand-text h3 {
+    color: var(--text-main) !important; /* Memastikan teks Admin/Pengelola bisa terbaca */
+}
