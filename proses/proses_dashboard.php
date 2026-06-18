@@ -49,3 +49,4 @@ while ($row = $result_recent->fetch_assoc()) {
     $recent_reports[] = $row;
 }
 $stmt_recent->close();
+?>

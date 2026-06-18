@@ -92,3 +92,4 @@ function format_tgl_riwayat(string $datetime): string
     $ts = strtotime($datetime);
     return date('d', $ts) . ' ' . $bulan_indo[(int)date('m', $ts)] . '<br><span style="font-size:11px; color:#94a3b8;">' . date('Y', $ts) . '</span>';
 }
+?>

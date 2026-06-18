@@ -119,3 +119,4 @@ foreach ($words as $w) {
 }
 $inisial = strtoupper(substr($inisial, 0, 2));
 if (empty($inisial)) $inisial = "M";
+?>

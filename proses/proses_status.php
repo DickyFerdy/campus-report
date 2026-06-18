@@ -67,3 +67,4 @@ function format_tgl(string $datetime): string
     $ts = strtotime($datetime);
     return date('d', $ts) . ' ' . $bulan_indo[(int)date('m', $ts)] . ' ' . date('Y', $ts);
 }
+?>

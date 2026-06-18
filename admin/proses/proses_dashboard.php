@@ -59,3 +59,4 @@ if (!function_exists('format_tgl_admin')) {
         return date('d', $ts) . ' ' . $bulan_indo[(int)date('m', $ts)] . '<br><span style="font-size:12px; color:#94a3b8;">' . date('Y', $ts) . '</span>';
     }
 }
+?>
