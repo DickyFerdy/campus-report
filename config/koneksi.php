@@ -1,10 +1,10 @@
 <?php
 date_default_timezone_set('Asia/Jakarta');
     
-$host = "sql112.infinityfree.com";
-$user = "if0_42094837";
-$pass = "noviaNur1704";
-$dbname = "if0_42094837_campus_report";
+$host = "localhost";
+$user = "root";
+$pass = "";
+$dbname = "campus_report";
 $port = 3306;
 
 // koneksi ke database
