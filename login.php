@@ -127,6 +127,14 @@ if (isset($_SESSION['user_id'])) {
                 <iconify-icon icon="lucide:shield-check"></iconify-icon>
             </div>
             <h2 style="text-align: center;">Login Admin CampusReport</h2>
+            <?php if (isset($_SESSION['error_admin'])): ?>
+                <div style="color: #dc2626; background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px; margin-bottom: 20px; text-align: center; font-size: 14px;">
+                    <iconify-icon icon="lucide:x-circle" style="vertical-align: middle; margin-right: 5px;"></iconify-icon>
+                    <?= $_SESSION['error_admin']; ?>
+                </div>
+                <?php unset($_SESSION['error_admin']); // Hapus pesan setelah ditampilkan 
+                ?>
+            <?php endif; ?>
             <p class="subtitle" style="text-align: center;">Masuk ke dashboard pengelola untuk memverifikasi dan menindaklanjuti laporan.</p>
 
             <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 16px; display: flex; align-items: flex-start; gap: 12px; text-align: left; margin-bottom: 24px;">

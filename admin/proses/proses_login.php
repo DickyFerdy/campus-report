@@ -66,13 +66,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !$is_locked) {
                 // Gagal Password: Catat percobaan
                 $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
                 $_SESSION['last_failed_login'] = time();
-                $pesan = "<div class='alert-error'><iconify-icon icon='lucide:lock'></iconify-icon> Akses Ditolak: Password salah!</div>";
+                $_SESSION['error_admin'] = "Akses Ditolak: Password salah!";
+                header("Location: ../login.php?tab=admin");
+                exit();
             }
         } else {
             // Gagal Email: Catat percobaan (untuk mencegah user enumeration timing attack)
             $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
             $_SESSION['last_failed_login'] = time();
-            $pesan = "<div class='alert-error'><iconify-icon icon='lucide:user-x'></iconify-icon> Akses Ditolak: Email tidak terdaftar!</div>";
+            $_SESSION['error_admin'] = "Akses Ditolak: Email tidak terdaftar!";
+            header("Location: ../login.php?tab=admin");
+            exit();
         }
         $stmt->close();
     }
