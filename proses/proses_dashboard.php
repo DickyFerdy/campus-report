@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/../config/koneksi.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -49,4 +49,3 @@ while ($row = $result_recent->fetch_assoc()) {
     $recent_reports[] = $row;
 }
 $stmt_recent->close();
-?>

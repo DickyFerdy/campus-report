@@ -9,7 +9,7 @@ require_once __DIR__ . '/../config/koneksi.php';
 
 // 1. Mengecek Sesi (Aman dari error $nama_user)
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 $user_id = $_SESSION['user_id'];
@@ -88,4 +88,3 @@ foreach ($words as $w) {
 }
 $inisial = strtoupper(substr($inisial, 0, 2));
 if (empty($inisial)) $inisial = "M"; // Fallback jika nama kosong
-?>

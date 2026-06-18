@@ -6,7 +6,7 @@ require_once __DIR__ . '/../config/koneksi.php';
 
 // 1. Mengecek Sesi Login
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -119,4 +119,3 @@ foreach ($words as $w) {
 }
 $inisial = strtoupper(substr($inisial, 0, 2));
 if (empty($inisial)) $inisial = "M";
-?>

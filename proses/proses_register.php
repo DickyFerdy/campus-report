@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             if ($stmt->execute()) {
-                $pesan = "<div class='alert-success'>Pendaftaran berhasil! Silahkan <a href='login.php' style='color: #1a56db; font-weight:600;'>Masuk</a>.</div>";
+                $pesan = "<div class='alert-success'>Pendaftaran berhasil! Silahkan <a href='index.php' style='color: #1a56db; font-weight:600;'>Masuk</a>.</div>";
             } else {
                 $pesan = "<div class='alert-error'>Terjadi kesalahan: " . $stmt->error . "</div>";
             }
@@ -43,4 +43,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-?>

@@ -6,14 +6,14 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once __DIR__ . '/../config/koneksi.php';
 
+if (!isset($_SESSION['user_id'])) {
+     header("Location: index.php");
+     exit();
+}
+
 $pesan = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: login.php");
-        exit();
-    }
-
     $user_id       = $_SESSION['user_id'];
     $judul_laporan = trim($_POST['judul_laporan'] ?? '');
     $kategori      = trim($_POST['kategori'] ?? '');
@@ -89,4 +89,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-?>

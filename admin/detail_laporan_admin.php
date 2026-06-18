@@ -1,13 +1,5 @@
 <?php
 require_once __DIR__ . '/proses/proses_detail.php';
-
-// Inisialisasi Session dan CSRF Token
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
 ?>
 
 <!DOCTYPE html>
@@ -57,12 +49,10 @@ if (empty($_SESSION['csrf_token'])) {
 
                     <form action="" method="POST" class="admin-detail-grid">
 
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token']) ?>">
-
                         <div class="left-col">
                             <div class="admin-detail-header" style="margin-bottom: 24px;">
                                 <div class="admin-detail-meta" style="color: var(--primary-color); font-weight: 600;">
-                                    <iconify-icon icon="lucide:calendar"></iconify-icon> <?= $tanggal_dibuat ?>
+                                    <iconify-icon icon="lucide:calendar"></iconify-icon> <?= format_tgl_full($detail['created_at']) ?>
                                 </div>
                                 <h2><?= htmlspecialchars($detail['judul_laporan']) ?></h2>
                                 <div class="admin-detail-meta">

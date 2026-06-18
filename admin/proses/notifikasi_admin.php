@@ -13,4 +13,3 @@ if (isset($_SESSION['admin_id'])) {
     }
     $stmt->close();
 }
-?>

@@ -6,7 +6,7 @@ require_once __DIR__ . '/../config/koneksi.php';
 
 // Mengecek sesi login
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -67,4 +67,3 @@ function format_tgl(string $datetime): string
     $ts = strtotime($datetime);
     return date('d', $ts) . ' ' . $bulan_indo[(int)date('m', $ts)] . ' ' . date('Y', $ts);
 }
-?>

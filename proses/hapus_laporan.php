@@ -4,7 +4,7 @@ require_once __DIR__ . '/../config/koneksi.php';
 
 // Memastikan user sudah login
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -47,7 +47,7 @@ if (isset($_GET['id'])) {
         exit();
     }
 } else {
-    header("Location: ../dashboard.php");
+    header("Location: dashboard.php");
     exit();
 }
 ?>

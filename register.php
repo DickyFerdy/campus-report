@@ -1,5 +1,5 @@
 <?php
-include 'proses/proses_register.php';
+require_once __DIR__ . '/proses/proses_register.php';
 
 if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
@@ -77,7 +77,7 @@ if (isset($_SESSION['user_id'])) {
         </form>
 
         <div class="footer-text">
-            Sudah punya akun? <a href="login.php">Masuk</a>
+            Sudah punya akun? <a href="index.php">Masuk</a>
         </div>
     </div>
 

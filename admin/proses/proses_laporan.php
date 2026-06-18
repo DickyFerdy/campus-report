@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../config/koneksi.php';
 
 // Proteksi akses admin
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: index.php");
+    header("Location: ../../index.php");
     exit();
 }
 
@@ -102,4 +102,3 @@ if (!function_exists('format_tgl_admin')) {
         return date('d', $ts) . ' ' . $bulan_indo[(int)date('m', $ts)] . '<br><span style="font-size:12px; color:#94a3b8;">' . date('Y', $ts) . '</span>';
     }
 }
-?>

@@ -1,5 +1,5 @@
 <?php
-include 'proses/proses_lupa_password.php';
+include '/proses/proses_lupa_password.php';
 
 if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
@@ -126,7 +126,7 @@ if (isset($_SESSION['user_id'])) {
         </form>
 
         <div class="form-footer-link">
-            <a href="login.php">
+            <a href="index.php">
                 <iconify-icon icon="lucide:arrow-left" width="14"></iconify-icon> Kembali ke Login
             </a>
         </div>

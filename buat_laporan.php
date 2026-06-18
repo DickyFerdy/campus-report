@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/proses/proses_laporan.php'
+include_once __DIR__ . '/proses/proses_laporan.php'
 ?>
 
 <!DOCTYPE html>
