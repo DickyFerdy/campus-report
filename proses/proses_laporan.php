@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->execute()) {
                 $_SESSION['sukses_laporan'] = "Laporan berhasil dikirim! Teknisi kami akan segera meninjaunya.";
 
-                header("Location: dashboard.php");
+                header("Location: status_laporan.php");
                 exit();
             } else {
                 $pesan = "<div class='alert-error'>Terjadi kesalahan database: " . $stmt->error . "</div>";

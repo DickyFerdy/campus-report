@@ -19,7 +19,6 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
             align-items: center;
         }
 
-        /* style jika laporan kosong */
         .empty-state {
             text-align: center;
             padding: 40px 20px;
