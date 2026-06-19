@@ -63,7 +63,6 @@ require_once __DIR__ . '/proses/proses_status.php';
                     $status_db = strtolower($report['status']);
                     $format_id = "ID: CR-" . str_pad($report['id'], 4, "0", STR_PAD_LEFT);
 
-                    // Default Stepper Classes
                     $step1 = "";
                     $step2 = "";
                     $step3 = "";
@@ -73,7 +72,6 @@ require_once __DIR__ . '/proses/proses_status.php';
                     $icon3 = "lucide:check";
                     $icon4 = "lucide:check";
 
-                    // Logika Pewarnaan Stepper berdasarkan status
                     if ($status_db == 'menunggu') {
                         $step1 = "waiting-step";
                         $icon1 = "lucide:hourglass";

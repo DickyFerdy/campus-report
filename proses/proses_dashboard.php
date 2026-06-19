@@ -1,5 +1,4 @@
 <?php
-// Tambahkan guard pengecekan session untuk keamanan dan mencegah error duplikasi
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

@@ -1,6 +1,6 @@
 <?php
 // KUNCI KEAMANAN: Hapus atau beri komentar pada baris 'die()' di bawah ini 
-// HANYA jika Anda butuh mereset/menambah admin saat development. 
+// HANYA jika butuh mereset/menambah admin saat development. 
 // JANGAN LUPA KEMBALIKAN BARIS INI SETELAH SELESAI.
 // die("Akses ditolak: File setup_admin.php telah dikunci demi keamanan sistem.");
 
@@ -18,7 +18,6 @@ $result = $stmt_check->get_result();
 if ($result->num_rows > 0) {
     echo "<h3 style='color:orange;'><iconify-icon icon='lucide:alert-circle'></iconify-icon> Tindakan dibatalkan: Admin dengan email $email sudah ada di dalam database.</h3>";
 } else {
-    // Jika belum ada, proses insert berjalan
     $nama = 'Admin Sarpras';
     $pass = password_hash('admin123', PASSWORD_DEFAULT);
 

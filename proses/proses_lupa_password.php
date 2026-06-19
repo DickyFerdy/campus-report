@@ -22,8 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
 
-            // TODO: Implementasi pengiriman email menggunakan PHPMailer
-            // Saat ini hanya simulasi UI untuk keperluan prototype
             $pesan = "<div class='alert-success' style='line-height: 1.5;'>
                         <iconify-icon icon='lucide:check-circle' style='font-size:20px; vertical-align:middle; margin-right:8px;'></iconify-icon>
                         <strong>Permintaan Berhasil!</strong><br>

@@ -3,9 +3,8 @@ session_start();
 
 require_once __DIR__ . '/../../config/koneksi.php';
 
-// Proteksi Keamanan: Memastikan yang mengakses adalah Admin
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
     exit();
 }
 
@@ -30,7 +29,7 @@ $stmt_stats->execute();
 $result_stats = $stmt_stats->get_result();
 
 while ($row = $result_stats->fetch_assoc()) {
-    $stat_total += $row['jumlah']; // Menambahkan ke total keseluruhan
+    $stat_total += $row['jumlah'];
 
     $status_lower = strtolower($row['status']);
     if ($status_lower == 'menunggu') $stat_menunggu = $row['jumlah'];

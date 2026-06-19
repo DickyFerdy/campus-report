@@ -4,13 +4,11 @@ $notif_admin_items = [];
 $unread_admin_count = 0;
 
 if (isset($conn)) {
-    // 1. Menghitung HANYA laporan 'Menunggu' yang BELUM DIBACA admin
     $stmt_count = $conn->prepare("SELECT COUNT(id) as jml FROM reports WHERE status = 'Menunggu' AND is_admin_read = 0");
     $stmt_count->execute();
     $unread_admin_count = $stmt_count->get_result()->fetch_assoc()['jml'];
     $stmt_count->close();
 
-    // 2. Mengambil 5 laporan 'Menunggu' terbaru (Bawa is_admin_read untuk gaya visual)
     $stmt_notif = $conn->prepare("SELECT id, judul_laporan, created_at, is_admin_read FROM reports WHERE status = 'Menunggu' ORDER BY created_at DESC LIMIT 5");
     $stmt_notif->execute();
     $res_notif = $stmt_notif->get_result();

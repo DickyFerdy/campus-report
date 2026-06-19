@@ -43,14 +43,14 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
         <main class="main-content">
 
             <?php include 'includes/topbar.php'; ?>
-            
+
             <?php if (isset($_SESSION['sukses_laporan'])): ?>
                 <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 14px 16px; border-radius: 8px; margin-bottom: 24px; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <iconify-icon icon="lucide:check-circle" width="18"></iconify-icon>
                     <span><?= $_SESSION['sukses_laporan']; ?></span>
                 </div>
                 <?php unset($_SESSION['sukses_laporan']); ?>
-            <?php endif; ?>            
+            <?php endif; ?>
 
             <div class="dashboard-header">
                 <div>
@@ -118,10 +118,8 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
                                 $status_class = 'kategori';
                             }
 
-                            // Format tanggal dari database (Contoh: 24 Okt 2024)
                             $tanggal_format = date('d M Y', strtotime($report['created_at']));
 
-                            // Path gambar
                             $img_src = !empty($report['foto_bukti']) ? 'assets/uploads/' . htmlspecialchars($report['foto_bukti']) : 'https://via.placeholder.com/150/e2e8f0/94a3b8?text=Foto';
                             ?>
                             <div class="report-card">

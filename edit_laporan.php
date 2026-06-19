@@ -25,7 +25,6 @@ require_once __DIR__ . '/proses/proses_edit.php';
     <div class="dashboard-layout">
 
         <?php
-        // Menggunakan include untuk sidebar agar konsisten
         $current_page = 'status_laporan';
         include 'includes/sidebar.php';
         ?>
@@ -33,7 +32,6 @@ require_once __DIR__ . '/proses/proses_edit.php';
         <main class="main-content">
 
             <?php
-            // Menggunakan include untuk topbar agar konsisten
             include 'includes/topbar.php';
             ?>
 

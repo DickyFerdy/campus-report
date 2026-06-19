@@ -1,5 +1,5 @@
 <?php
-include '/proses/proses_lupa_password.php';
+include_once __DIR__ . '/proses/proses_lupa_password.php';
 
 if (isset($_SESSION['user_id'])) {
     header("Location: dashboard.php");
@@ -17,7 +17,6 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="assets/css/style.css?v=<?= time(); ?>">
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <style>
-        /* Desain Khusus Centered Auth Page */
         body.auth-body {
             background-color: var(--bg-body);
             display: flex;

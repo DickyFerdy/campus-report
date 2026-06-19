@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $konfirmasi    = $_POST['konfirmasi_password'] ?? '';
     $program_studi = $_POST['program_studi'] ?? '';
 
-    // validasi input
     if (empty($nama_lengkap) || empty($npm) || empty($email) || empty($password) || empty($program_studi)) {
         $pesan = "<div class='alert-error'>Semua kolom wajib diisi!</div>";
     } else if ($password !== $konfirmasi) {

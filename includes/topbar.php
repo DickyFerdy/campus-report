@@ -12,10 +12,8 @@ foreach ($words as $w) {
 $topbar_inisial = strtoupper(substr($topbar_inisial, 0, 2));
 if (empty($topbar_inisial)) $topbar_inisial = "M";
 
-// --- LOGIKA BARU: TAHUN ANGKATAN DARI NPM ---
 $topbar_npm = $_SESSION['npm'] ?? '';
 
-// Jika NPM belum ada di Session, ambil langsung dari database
 if (empty($topbar_npm)) {
     $stmt_npm = $conn->prepare("SELECT npm FROM users WHERE id = ?");
     $stmt_npm->bind_param("i", $_SESSION['user_id']);
@@ -23,22 +21,19 @@ if (empty($topbar_npm)) {
     $res_npm = $stmt_npm->get_result();
     if ($row_npm = $res_npm->fetch_assoc()) {
         $topbar_npm = $row_npm['npm'];
-        $_SESSION['npm'] = $topbar_npm; // Simpan ke session agar tidak query berulang kali
+        $_SESSION['npm'] = $topbar_npm;
     }
     $stmt_npm->close();
 }
 
-// Mengambil 2 digit pertama dari NPM untuk menentukan angkatan
 $dua_digit = substr($topbar_npm, 0, 2);
-if (empty($dua_digit)) $dua_digit = "24"; // Fallback aman
+if (empty($dua_digit)) $dua_digit = "24";
 $teks_angkatan = "MHS-20" . $dua_digit;
-// --------------------------------------------
 
 $notif_items = [];
 $unread_count = 0;
 $user_id_notif = $_SESSION['user_id'];
 
-// Query notifikasi langsung dieksekusi karena ketersediaan $conn sudah dijamin di baris atas
 $stmt_notif = $conn->prepare("SELECT id, judul_laporan, status, updated_at, is_notif_read FROM reports WHERE user_id = ? AND status != 'Menunggu' ORDER BY updated_at DESC LIMIT 5");
 $stmt_notif->bind_param("i", $user_id_notif);
 $stmt_notif->execute();

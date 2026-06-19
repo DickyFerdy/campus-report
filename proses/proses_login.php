@@ -1,5 +1,4 @@
 <?php
-// Mengecek apakah sesi sudah berjalan sebelum memulai sesi baru
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -15,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($identifier) || empty($password)) {
         $pesan = "<div class='alert-error'>Email/NPM dan Password wajib diisi!</div>";
     } else {
-        // Update query untuk ikut mengambil kolom 'npm'
         $stmt = $conn->prepare("SELECT id, nama_lengkap, npm, password FROM users WHERE email = ? OR npm = ?");
         $stmt->bind_param("ss", $identifier, $identifier);
         $stmt->execute();
@@ -25,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $row['password'])) {
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['nama_lengkap'] = $row['nama_lengkap'];
-                $_SESSION['npm'] = $row['npm']; // Simpan NPM ke session agar tidak perlu query ulang di topbar
+                $_SESSION['npm'] = $row['npm'];
 
                 header("Location: dashboard.php");
                 exit();

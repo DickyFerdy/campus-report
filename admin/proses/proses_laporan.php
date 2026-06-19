@@ -2,9 +2,8 @@
 session_start();
 require_once __DIR__ . '/../../config/koneksi.php';
 
-// Proteksi akses admin
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
     exit();
 }
 
@@ -12,7 +11,6 @@ $admin_nama = $_SESSION['admin_nama'];
 $words = explode(" ", $admin_nama);
 $inisial_admin = strtoupper(substr($words[0], 0, 1) . (isset($words[1]) ? substr($words[1], 0, 1) : ''));
 
-// Menangkap Parameter Filter
 $kategori = isset($_GET['kategori']) ? $_GET['kategori'] : 'semua';
 $status   = isset($_GET['status']) ? $_GET['status'] : 'semua';
 $sort     = isset($_GET['sort']) ? $_GET['sort'] : 'terbaru';
@@ -20,7 +18,6 @@ $page     = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 if ($page < 1) $page = 1;
 
-// Base Query dengan JOIN untuk mendapat nama pelapor
 $sql_base = "FROM reports r JOIN users u ON r.user_id = u.id WHERE 1=1";
 
 $params = [];
@@ -43,7 +40,6 @@ if ($search !== '') {
     $types .= "sss";
 }
 
-// Menghitung total baris untuk Pagination
 $sql_count = "SELECT COUNT(r.id) as total " . $sql_base;
 $stmt_count = $conn->prepare($sql_count);
 if (!empty($params)) $stmt_count->bind_param($types, ...$params);
@@ -55,7 +51,6 @@ $limit = 5;
 $total_pages = ceil($total_rows / $limit);
 $offset = ($page - 1) * $limit;
 
-// Mengammbil Data Utama
 $order_sql = ($sort === 'terlama') ? 'ASC' : 'DESC';
 $sql_data = "SELECT r.id, r.judul_laporan, r.kategori, r.gedung, r.detail_lokasi, r.status, r.created_at, u.nama_lengkap as pelapor " . $sql_base . " ORDER BY r.created_at " . $order_sql . " LIMIT ? OFFSET ?";
 $types .= "ii";
@@ -71,15 +66,12 @@ $stat_hari_ini = 0;
 $stat_urgent = 0;
 $stat_respon = "0j";
 
-// 1. Laporan Hari Ini
 $res1 = $conn->query("SELECT COUNT(*) as jml FROM reports WHERE DATE(created_at) = CURDATE()");
 if ($res1) $stat_hari_ini = $res1->fetch_assoc()['jml'];
 
-// 2. Laporan Urgent (Prioritas Tinggi & Masih Menunggu)
 $res2 = $conn->query("SELECT COUNT(*) as jml FROM reports WHERE prioritas = 'Tinggi' AND status = 'Menunggu'");
 if ($res2) $stat_urgent = $res2->fetch_assoc()['jml'];
 
-// 3. Rata-rata Respon (Selisih waktu dibuat dan diproses)
 $res3 = $conn->query("SELECT AVG(TIMESTAMPDIFF(MINUTE, created_at, updated_at)) AS avg_min FROM reports WHERE status != 'Menunggu'");
 if ($res3) {
     $row3 = $res3->fetch_assoc();
@@ -93,7 +85,6 @@ if ($res3) {
 
 $bulan_indo = [1 => 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
 
-// Mencegah Fatal Error redeclare function
 if (!function_exists('format_tgl_admin')) {
     function format_tgl_admin(string $datetime): string
     {

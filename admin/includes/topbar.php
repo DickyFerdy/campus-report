@@ -36,7 +36,6 @@ require_once __DIR__ . '/../proses/proses_topbar.php';
                         <?php if (count($notif_admin_items) > 0): ?>
                             <?php foreach ($notif_admin_items as $n): ?>
                                 <?php
-                                // Jika sudah dibaca, buat background sedikit transparan/redup
                                 $bg_color = ($n['is_admin_read'] == 1) ? 'transparent' : '#f8fafc';
                                 $opacity = ($n['is_admin_read'] == 1) ? '0.7' : '1';
                                 ?>
@@ -82,23 +81,19 @@ require_once __DIR__ . '/../proses/proses_topbar.php';
 
         if (markReadAdminBtn) {
             markReadAdminBtn.addEventListener('click', function(e) {
-                e.stopPropagation(); // Mencegah dropdown tertutup saat diklik
+                e.stopPropagation();
                 e.preventDefault();
 
-                // Panggil API di background
                 fetch('proses/notifikasi_admin.php')
                     .then(response => response.text())
                     .then(data => {
                         if (data.trim() === 'success') {
-                            // 1. Hilangkan titik merah secara instan
                             if (adminNotifBadge) adminNotifBadge.style.display = 'none';
 
-                            // 2. Ubah teks tombol menjadi warna abu-abu
                             markReadAdminBtn.innerText = 'Telah dibaca';
                             markReadAdminBtn.style.color = '#94a3b8';
                             markReadAdminBtn.style.cursor = 'default';
 
-                            // 3. Ubah style item notifikasi menjadi redup
                             document.querySelectorAll('.admin-notif-item').forEach(item => {
                                 item.style.background = 'transparent';
                                 item.style.opacity = '0.7';

@@ -2,17 +2,13 @@
 session_start();
 require_once __DIR__ . '/../../config/koneksi.php';
 
-// Jika sudah login, langsung lempar ke dasbor
 if (isset($_SESSION['admin_id'])) {
     header("Location: dashboard.php");
     exit();
 }
 
-// ===========================================================================
-// KONFIGURASI RATE LIMITING (BRUTE-FORCE PROTECTION)
-// ===========================================================================
-$max_attempts = 5;       // Maksimal percobaan gagal
-$lockout_time = 300;     // Waktu tunggu dalam detik (300 detik = 5 menit)
+$max_attempts = 5;
+$lockout_time = 300;
 $is_locked = false;
 
 if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] >= $max_attempts) {
@@ -22,8 +18,7 @@ if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] >= $max_at
         $is_locked = true;
         $time_left = $lockout_time - $time_passed;
         $minutes_left = ceil($time_left / 60);
-        
-        // Simpan pesan error ke Session lalu lempar kembali ke form login
+
         $_SESSION['pesan_admin'] = "<div style='background:#fef2f2; border:1px solid #fecaca; border-radius:12px; padding:14px 16px; margin-bottom:24px; color:#b91c1c; font-size:13px; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; text-align:center;'><iconify-icon icon='lucide:shield-alert' style='font-size:18px;'></iconify-icon><span>Terlalu banyak percobaan gagal. Coba lagi dalam $minutes_left menit.</span></div>";
         header("Location: ../../index.php?role=admin");
         exit();
@@ -32,9 +27,7 @@ if (isset($_SESSION['login_attempts']) && $_SESSION['login_attempts'] >= $max_at
         unset($_SESSION['last_failed_login']);
     }
 }
-// ===========================================================================
 
-// Proses Form jika status tidak terkunci
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !$is_locked) {
     $email    = trim($_POST['email'] ?? '');
     $password = trim($_POST['password'] ?? '');
@@ -53,7 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !$is_locked) {
             $admin = $result->fetch_assoc();
 
             if (password_verify($password, $admin['password'])) {
-                // BERHASIL LOGIN
                 unset($_SESSION['login_attempts']);
                 unset($_SESSION['last_failed_login']);
                 session_regenerate_id(true);
@@ -61,28 +53,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !$is_locked) {
                 $_SESSION['admin_id']   = $admin['id'];
                 $_SESSION['admin_nama'] = $admin['nama_admin'];
 
-                // FIX: Harus mundur satu folder ke halaman admin/dashboard.php
                 header("Location: ../dashboard.php");
                 exit();
             } else {
-                // GAGAL: PASSWORD SALAH
                 $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
                 $_SESSION['last_failed_login'] = time();
-                
+
                 $_SESSION['pesan_admin'] = "<div style='background:#fef2f2; border:1px solid #fecaca; border-radius:12px; padding:14px 16px; margin-bottom:24px; color:#b91c1c; font-size:13px; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; text-align:center;'><iconify-icon icon='lucide:lock' style='font-size:18px;'></iconify-icon><span>Akses Ditolak: Password salah!</span></div>";
                 header("Location: ../../index.php?role=admin");
                 exit();
             }
         } else {
-            // GAGAL: EMAIL TIDAK TERDAFTAR
             $_SESSION['login_attempts'] = ($_SESSION['login_attempts'] ?? 0) + 1;
             $_SESSION['last_failed_login'] = time();
-            
-			$_SESSION['pesan_admin'] = "<div style='background:#fef2f2; border:1px solid #fecaca; border-radius:12px; padding:14px 16px; margin-bottom:24px; color:#b91c1c; font-size:13px; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; text-align:center;'><iconify-icon icon='lucide:user-x' style='font-size:18px;'></iconify-icon><span>Akses Ditolak: Email tidak terdaftar!</span></div>";
+
+            $_SESSION['pesan_admin'] = "<div style='background:#fef2f2; border:1px solid #fecaca; border-radius:12px; padding:14px 16px; margin-bottom:24px; color:#b91c1c; font-size:13px; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; text-align:center;'><iconify-icon icon='lucide:user-x' style='font-size:18px;'></iconify-icon><span>Akses Ditolak: Email tidak terdaftar!</span></div>";
             header("Location: ../../index.php?role=admin");
             exit();
         }
         $stmt->close();
     }
 }
-?>

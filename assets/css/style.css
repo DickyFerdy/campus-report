@@ -30,7 +30,6 @@ body {
     padding: 20px;
 }
 
-/* --- Container Authentication --- */
 .register-container,
 .login-container {
     background: var(--bg-surface);
@@ -49,7 +48,6 @@ body {
     max-width: 420px;
 }
 
-/* --- Typography --- */
 .logo {
     text-align: center;
     color: var(--primary-color);
@@ -76,7 +74,6 @@ body {
     line-height: 1.5;
 }
 
-/* --- Forms & Inputs --- */
 .form-group {
     margin-bottom: 18px;
 }
@@ -132,7 +129,6 @@ select.form-control {
     gap: 16px;
 }
 
-/* --- Checkbox & Options --- */
 .checkbox-group {
     display: flex;
     align-items: flex-start;
@@ -166,7 +162,6 @@ select.form-control {
     text-decoration: underline;
 }
 
-/* Khusus Baris Opsi di Login */
 .options-row {
     display: flex;
     justify-content: space-between;
@@ -198,7 +193,6 @@ select.form-control {
     text-decoration: underline;
 }
 
-/* --- Buttons & Dividers --- */
 .btn-submit {
     width: 100%;
     padding: 14px;
@@ -246,7 +240,6 @@ select.form-control {
     letter-spacing: 1px;
 }
 
-/* --- Alerts & Footer --- */
 .alert-success {
     background-color: #f0fdf4;
     color: #166534;
@@ -288,7 +281,6 @@ select.form-control {
     text-decoration: underline;
 }
 
-/* --- Responsive Media Queries --- */
 @media (max-width: 480px) {
 
     .register-container,
@@ -302,18 +294,12 @@ select.form-control {
     }
 }
 
-/* =========================================
-   --- DESAIN KHUSUS DASHBOARD ---
-========================================= */
-
-/* Penyesuaian Body khusus Dashboard agar tidak ke-tengah seperti halaman Login */
 body.dashboard-page {
     display: block;
     padding: 0;
     overflow-x: hidden;
 }
 
-/* --- Variabel Warna Tambahan Khusus Dashboard --- */
 :root {
     --sidebar-bg: #f8fafc;
     --sidebar-hover: #e2e8f0;
@@ -325,13 +311,11 @@ body.dashboard-page {
     --sidebar-width: 260px;
 }
 
-/* --- Layout Utama --- */
 .dashboard-layout {
     display: flex;
     min-height: 100vh;
 }
 
-/* --- Sidebar --- */
 .sidebar {
     width: var(--sidebar-width);
     background-color: var(--sidebar-bg);
@@ -417,14 +401,12 @@ body.dashboard-page {
     background-color: #fef2f2 !important;
 }
 
-/* --- Main Content Area --- */
 .main-content {
     flex: 1;
     margin-left: var(--sidebar-width);
     padding: 24px 40px;
 }
 
-/* Topbar */
 .topbar {
     display: flex;
     justify-content: space-between;
@@ -488,7 +470,6 @@ body.dashboard-page {
     font-weight: 600;
 }
 
-/* Dashboard Header */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -528,7 +509,6 @@ body.dashboard-page {
     background-color: var(--primary-hover);
 }
 
-/* Stats Grid */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -566,7 +546,6 @@ body.dashboard-page {
     color: var(--text-main);
 }
 
-/* Content Grid (Left & Right Column) */
 .content-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -589,7 +568,6 @@ body.dashboard-page {
     font-weight: 600;
 }
 
-/* Report List */
 .report-card {
     background: var(--bg-surface);
     padding: 16px;
@@ -661,7 +639,6 @@ body.dashboard-page {
     color: var(--text-muted);
 }
 
-/* Quick Actions Widget */
 .action-widget {
     background: linear-gradient(135deg, var(--primary-color), #2563eb);
     padding: 24px;
@@ -709,7 +686,6 @@ body.dashboard-page {
     font-size: 14px;
 }
 
-/* Floating Action Button */
 .fab {
     position: fixed;
     bottom: 30px;
@@ -733,7 +709,6 @@ body.dashboard-page {
     background-color: var(--primary-hover);
 }
 
-/* Responsive Mobile */
 @media (max-width: 1024px) {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -777,10 +752,6 @@ body.dashboard-page {
     }
 }
 
-/* =========================================
-   --- DESAIN KHUSUS FORM LAPORAN ---
-========================================= */
-
 .page-header {
     text-align: center;
     margin-bottom: 32px;
@@ -799,7 +770,6 @@ body.dashboard-page {
     margin: 0;
 }
 
-/* Card Container untuk Form */
 .form-card {
     background: var(--bg-surface);
     padding: 32px 40px;
@@ -808,7 +778,6 @@ body.dashboard-page {
     margin-bottom: 32px;
 }
 
-/* Grid Layout Form Kiri & Kanan */
 .form-grid-2-col {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -822,7 +791,6 @@ body.dashboard-page {
     gap: 16px;
 }
 
-/* Custom Radio Button (Pills) untuk Prioritas */
 .priority-group {
     display: flex;
     gap: 12px;
@@ -831,7 +799,6 @@ body.dashboard-page {
 
 .priority-group input[type="radio"] {
     display: none;
-    /* Sembunyikan radio button asli */
 }
 
 .priority-group label {
@@ -851,30 +818,24 @@ body.dashboard-page {
     border-color: #cbd5e1;
 }
 
-/* --- Style saat radio button dipilih berdasarkan ID --- */
-
-/* 1. Prioritas Rendah (Biru) */
 #prioritas_rendah:checked+label {
     background-color: #dbeafe;
     border-color: #2563eb;
     color: var(--text-main);
 }
 
-/* 2. Prioritas Sedang (Oranye/Peach) */
 #prioritas_sedang:checked+label {
     background-color: #ffedd5;
     border-color: #c2410c;
     color: var(--text-main);
 }
 
-/* 3. Prioritas Tinggi (Merah/Pink) */
 #prioritas_tinggi:checked+label {
     background-color: #fee2e2;
     border-color: #b91c1c;
     color: var(--text-main);
 }
 
-/* Tambahan: efek hover agar sedikit lebih interaktif */
 #prioritas_rendah:hover+label {
     border-color: #60a5fa;
 }
@@ -887,14 +848,12 @@ body.dashboard-page {
     border-color: #f87171;
 }
 
-/* Textarea khusus Deskripsi */
 textarea.form-control {
     resize: vertical;
     min-height: 135px;
     font-family: inherit;
 }
 
-/* Area Unggah Foto */
 .upload-area {
     border: 2px dashed var(--border-color);
     border-radius: 16px;
@@ -946,7 +905,6 @@ textarea.form-control {
     font-size: 12px;
 }
 
-/* Form Actions (Tombol Batal & Kirim) */
 .form-actions {
     display: flex;
     justify-content: flex-end;
@@ -972,7 +930,6 @@ textarea.form-control {
     background-color: #cbd5e1;
 }
 
-/* btn-primary sudah ada sebelumnya, kita modif sedikit padding-nya untuk tombol ini */
 .btn-submit-report {
     background-color: var(--primary-color);
     color: white;
@@ -990,7 +947,6 @@ textarea.form-control {
     background-color: var(--primary-hover);
 }
 
-/* Info Cards di Bawah */
 .info-cards-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1027,7 +983,6 @@ textarea.form-control {
     line-height: 1.5;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
 
     .form-grid-2-col,
@@ -1042,11 +997,6 @@ textarea.form-control {
     }
 }
 
-/* =========================================
-   --- DESAIN KHUSUS DETAIL LAPORAN ---
-========================================= */
-
-/* Header Detail & Back Link */
 .back-link {
     display: inline-flex;
     align-items: center;
@@ -1090,7 +1040,6 @@ textarea.form-control {
     gap: 12px;
 }
 
-/* Informasi Laporan Grid */
 .detail-card {
     background: var(--bg-surface);
     padding: 32px;
@@ -1138,7 +1087,6 @@ textarea.form-control {
     font-weight: 600;
 }
 
-/* Deskripsi & Foto Box */
 .desc-box {
     background-color: var(--bg-body);
     padding: 20px;
@@ -1157,7 +1105,6 @@ textarea.form-control {
     border: 1px solid var(--border-color);
 }
 
-/* Respon Admin Card */
 .admin-response-card {
     background: var(--bg-surface);
     padding: 24px;
@@ -1190,7 +1137,6 @@ textarea.form-control {
     align-items: center;
 }
 
-/* Timeline Status Penanganan */
 .timeline {
     position: relative;
     padding-left: 20px;
@@ -1198,7 +1144,6 @@ textarea.form-control {
     margin-bottom: 32px;
 }
 
-/* Garis vertikal timeline */
 .timeline::before {
     content: '';
     position: absolute;
@@ -1230,7 +1175,6 @@ textarea.form-control {
     z-index: 1;
 }
 
-/* Style Timeline Aktif */
 .timeline-item.active .timeline-dot {
     border-color: var(--primary-color);
     background-color: var(--primary-color);
@@ -1273,7 +1217,6 @@ textarea.form-control {
     line-height: 1.5;
 }
 
-/* Detail Tambahan (Prioritas & SLA) */
 .extra-info-row {
     display: flex;
     justify-content: space-between;
@@ -1287,7 +1230,6 @@ textarea.form-control {
     color: var(--text-main);
 }
 
-/* --- Tambahan Badge & Timeline Ditolak --- */
 .badge.success {
     background-color: #d1fae5;
     color: #047857;
@@ -1314,11 +1256,6 @@ textarea.form-control {
     border-radius: 50%;
 }
 
-/* =========================================
-   --- DESAIN KHUSUS STATUS LAPORAN ---
-========================================= */
-
-/* Filter Bar */
 .filter-bar {
     display: flex;
     justify-content: space-between;
@@ -1357,7 +1294,6 @@ textarea.form-control {
     color: white;
 }
 
-/* Status Layout Card */
 .status-card-split {
     background: var(--bg-surface);
     border-radius: 16px;
@@ -1378,7 +1314,6 @@ textarea.form-control {
     background-color: #fafbfd;
 }
 
-/* Left Panel Details */
 .status-header-meta {
     display: flex;
     justify-content: space-between;
@@ -1418,7 +1353,6 @@ textarea.form-control {
     gap: 6px;
 }
 
-/* Stepper / Progress Tracker */
 .tracker-header {
     font-size: 11px;
     font-weight: 800;
@@ -1443,7 +1377,6 @@ textarea.form-control {
     z-index: 1;
 }
 
-/* Garis penghubung */
 .stepper-item::before {
     position: absolute;
     content: "";
@@ -1458,7 +1391,6 @@ textarea.form-control {
     content: none;
 }
 
-/* Lingkaran Stepper */
 .step-counter {
     position: relative;
     display: flex;
@@ -1483,7 +1415,6 @@ textarea.form-control {
     line-height: 1.4;
 }
 
-/* STATE: Selesai / Checked (Hijau Solid) */
 .stepper-item.completed::before {
     border-bottom-color: #10b981;
 }
@@ -1498,7 +1429,6 @@ textarea.form-control {
     color: var(--text-main);
 }
 
-/* STATE: Active / Saat Ini (Biru) */
 .stepper-item.active-step::before {
     border-bottom-color: var(--primary-color);
 }
@@ -1514,7 +1444,6 @@ textarea.form-control {
     color: var(--primary-color);
 }
 
-/* STATE: Menunggu (Kuning) */
 .stepper-item.waiting-step .step-counter {
     background: white;
     border-color: #f59e0b;
@@ -1526,7 +1455,6 @@ textarea.form-control {
     color: #d97706;
 }
 
-/* STATE: Ditolak (Merah Solid) */
 .stepper-item.rejected-step::before {
     border-bottom-color: #ef4444;
 }
@@ -1542,7 +1470,6 @@ textarea.form-control {
     color: #ef4444;
 }
 
-/* Responsive Grid untuk Layar Kecil */
 @media (max-width: 900px) {
     .status-card-split {
         grid-template-columns: 1fr;
@@ -1554,11 +1481,6 @@ textarea.form-control {
     }
 }
 
-/* =========================================
-   --- DESAIN KHUSUS RIWAYAT LAPORAN ---
-========================================= */
-
-/* Header Top dengan Stats */
 .history-header-wrapper {
     display: flex;
     justify-content: space-between;
@@ -1608,7 +1530,6 @@ textarea.form-control {
     color: white;
 }
 
-/* Filter & Search Bar Area */
 .history-controls {
     display: flex;
     justify-content: space-between;
@@ -1640,7 +1561,6 @@ textarea.form-control {
     font-size: 13px;
 }
 
-/* Table Styles */
 .table-container {
     background: var(--bg-surface);
     border-radius: 16px;
@@ -1679,7 +1599,6 @@ textarea.form-control {
     background-color: #f8fafc;
 }
 
-/* Info text in table */
 .td-title {
     font-size: 14px;
     font-weight: 700;
@@ -1692,7 +1611,6 @@ textarea.form-control {
     color: var(--text-muted);
 }
 
-/* Pagination */
 .pagination-wrapper {
     display: flex;
     justify-content: space-between;
@@ -1736,7 +1654,6 @@ textarea.form-control {
     border-color: var(--primary-color);
 }
 
-/* Bottom Widgets */
 .bottom-widgets-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -1744,7 +1661,6 @@ textarea.form-control {
     margin-bottom: 40px;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .history-header-wrapper {
         flex-direction: column;
@@ -1766,9 +1682,6 @@ textarea.form-control {
     }
 }
 
-/* =========================================
-   --- DESAIN KHUSUS DROPDOWN NOTIFIKASI ---
-========================================= */
 .notif-wrapper {
     position: relative;
     display: inline-block;
@@ -1793,7 +1706,6 @@ textarea.form-control {
     color: var(--primary-color);
 }
 
-/* Titik Merah Notifikasi */
 .notif-badge {
     position: absolute;
     top: 2px;
@@ -1805,7 +1717,6 @@ textarea.form-control {
     border: 2px solid var(--bg-surface);
 }
 
-/* Kotak Dropdown */
 .notif-dropdown {
     position: absolute;
     top: 120%;
@@ -1817,7 +1728,6 @@ textarea.form-control {
     border: 1px solid var(--border-color);
     z-index: 100;
 
-    /* Animasi sembunyi/muncul */
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
@@ -1830,7 +1740,6 @@ textarea.form-control {
     transform: translateY(0);
 }
 
-/* Isi Notifikasi */
 .notif-header {
     padding: 16px;
     border-bottom: 1px solid var(--border-color);
@@ -1904,9 +1813,6 @@ textarea.form-control {
     font-size: 13px;
 }
 
-/* =========================================
-   --- DESAIN KHUSUS SYARAT & KETENTUAN ---
-========================================= */
 .doc-container {
     max-width: 760px;
     margin: 40px auto;
@@ -1979,11 +1885,6 @@ textarea.form-control {
     margin-bottom: 8px;
 }
 
-/* =========================================
-   --- DESAIN KHUSUS LOGIN ADMIN ---
-========================================= */
-
-/* Menambahkan box-sizing agar padding tidak menambah ukuran asli elemen */
 *,
 *::before,
 *::after {
@@ -2049,7 +1950,6 @@ body.admin-auth-body {
     line-height: 1.5;
 }
 
-/* Input dengan Icon Kiri (Konsisten) */
 .input-with-icon {
     position: relative;
     text-align: left;
@@ -2092,7 +1992,6 @@ body.admin-auth-body {
     box-shadow: 0 0 0 4px #eff6ff;
 }
 
-/* Tombol Toggle Mata */
 .toggle-pwd {
     position: absolute;
     right: 14px;
