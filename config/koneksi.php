@@ -13,3 +13,4 @@ if ($conn->connect_error) {
 }
 
 $conn->query("SET time_zone = '+07:00'");
+?>

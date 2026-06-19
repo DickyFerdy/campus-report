@@ -62,7 +62,7 @@ $format_id = "#CR-" . str_pad($detail['id'], 4, "0", STR_PAD_LEFT);
                     </div>
                 </div>
                 <div class="detail-actions">
-                    <a href="dashboard.php" class="btn-secondary" style="text-decoration:none; display:flex; align-items:center;">Kembali</a>
+                    <a href="riwayat.php" class="btn-secondary" style="text-decoration:none; display:flex; align-items:center;">Kembali</a>
                     <?php if ($status == 'menunggu'): ?>
                         <a href="edit_laporan.php?id=<?= $report_id ?>" class="btn-primary">
                             <iconify-icon icon="lucide:edit-2" width="16"></iconify-icon> Edit Laporan

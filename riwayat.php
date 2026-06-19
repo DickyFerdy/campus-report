@@ -51,6 +51,15 @@ require_once __DIR__ . '/proses/proses_riwayat.php';
                 </div>
             </div>
 
+            <?php if (isset($_SESSION['sukses_laporan'])): ?>
+                <div style="background-color: #f6fbf5; border: 1px solid #c3e6cb; color: #1e7e34; padding: 12px 20px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; font-size: 14px;">
+                    <iconify-icon icon="lucide:check-circle-2" width="20" style="margin-right: 10px; color: #28a745;"></iconify-icon>
+                    <?= htmlspecialchars($_SESSION['sukses_laporan']); ?>
+                </div>
+                <?php
+                unset($_SESSION['sukses_laporan']);
+                ?>
+            <?php endif; ?>
             <div class="history-controls">
                 <form action="riwayat.php" method="GET" class="search-form">
                     <iconify-icon icon="lucide:search" width="16" style="color: #9ca3af;"></iconify-icon>
@@ -93,7 +102,7 @@ require_once __DIR__ . '/proses/proses_riwayat.php';
                             <?php foreach ($reports as $report): ?>
                                 <?php
                                 $status_db = strtolower($report['status']);
-                                $badge_class = 'kategori'; // Default
+                                $badge_class = 'kategori';
                                 if ($status_db == 'menunggu') $badge_class = 'menunggu';
                                 if ($status_db == 'diproses') $badge_class = 'diproses';
                                 if ($status_db == 'selesai') $badge_class = 'success';

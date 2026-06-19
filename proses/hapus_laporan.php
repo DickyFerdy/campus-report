@@ -31,14 +31,15 @@ if (isset($_GET['id'])) {
 
         if ($hapus_stmt->execute()) {
             $_SESSION['sukses_laporan'] = "Laporan berhasil dibatalkan dan dihapus.";
-            header("Location: ../dashboard.php");
+            header("Location: ../riwayat.php");
             exit();
         }
     } else {
-        header("Location: ../dashboard.php");
+        header("Location: ../riwayat.php");
         exit();
     }
 } else {
-    header("Location: dashboard.php");
+    header("Location: ../riwayat.php");
     exit();
 }
+?>

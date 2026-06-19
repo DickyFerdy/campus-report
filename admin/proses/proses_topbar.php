@@ -28,3 +28,4 @@ if (!function_exists('time_ago_notif')) {
         return floor($diff / 86400) . " hari lalu";
     }
 }
+?>

@@ -57,9 +57,10 @@ $detail = $result->fetch_assoc();
 $stmt->close();
 
 $bulan_indo = [1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-function format_tgl_full($datetime)
+function format_tgl_full(string $datetime): string
 {
     global $bulan_indo;
     $ts = strtotime($datetime);
     return date('d', $ts) . ' ' . $bulan_indo[(int)date('m', $ts)] . ' ' . date('Y', $ts) . ' • ' . date('H:i A', $ts);
 }
+?>

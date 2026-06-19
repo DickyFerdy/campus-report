@@ -104,7 +104,6 @@ require_once __DIR__ . '/proses/proses_dashboard.php';
                     <?php if (count($recent_reports) > 0): ?>
                         <?php foreach ($recent_reports as $report): ?>
                             <?php
-                            // Format warna badge status
                             $status_lower = strtolower($report['status']);
                             if ($status_lower == 'menunggu') {
                                 $status_class = 'menunggu';
