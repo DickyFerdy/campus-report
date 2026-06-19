@@ -52,7 +52,7 @@ require_once __DIR__ . '/proses/proses_riwayat.php';
             </div>
 
             <?php if (isset($_SESSION['sukses_laporan'])): ?>
-                <div style="background-color: #f6fbf5; border: 1px solid #c3e6cb; color: #1e7e34; padding: 12px 20px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; font-size: 14px;">
+                <div style="background-color: #f6fbf5; border: 1px solid #c3e6cb; color: #1e7e34; padding: 12px 20px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; font-size: 14px;">
                     <iconify-icon icon="lucide:check-circle-2" width="20" style="margin-right: 10px; color: #28a745;"></iconify-icon>
                     <?= htmlspecialchars($_SESSION['sukses_laporan']); ?>
                 </div>
